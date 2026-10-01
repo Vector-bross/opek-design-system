@@ -24,7 +24,7 @@ const { title = 'Preview' } = Astro.props;
       /* Mobile mode: frame the component at 440px, centered on a light grey backdrop.
          The option bar stays full width — only the component is framed. */
       .vb-prev.is-mobileview { background: #ededed; min-height: 100vh; }
-      .vb-prev [data-tile].vb-tile-mobile > :not(:first-child) { left: auto !important; transform: none !important; width: 440px !important; max-width: 100% !important; margin-inline: auto !important; border: 1px solid var(--vb-color-scheme-1-border-color); border-radius: var(--vb-radius-xsmall); box-shadow: var(--vb-shadow-medium); overflow: hidden; background: #fff; }
+      .vb-prev [data-tile].vb-tile-mobile > :not(:first-child) { left: auto !important; transform: none !important; width: 440px !important; max-width: 100% !important; margin-inline: auto !important; border: 1px solid var(--vb-color-scheme-1-border-color); border-radius: var(--vb-radius-xsmall); box-shadow: var(--vb-shadow-medium); overflow: hidden; }
     </style>
   </head>
   <body class="text-base-content antialiased vb-prev">

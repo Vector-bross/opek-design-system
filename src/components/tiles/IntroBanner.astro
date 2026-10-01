@@ -1,26 +1,32 @@
 ---
 /**
- * MOLECULES — Tiles / IntroBanner. Atoms only: Image placeholder, Button.
- * Full-bleed black band (100vw), content 1120px. Desktop 2-col (image | text),
- * mobile stacked (text first, image after). Mobile switch toggles .is-mobile.
+ * MOLECULES — Tiles / IntroBanner (intro-text). OPEK Figma 18607:20014 (desktop),
+ * 18301:17231 (mobile). White band, content max-width 1280. Big ITC Kabel Book
+ * heading (64/48): first part black, tail grey (#aaa) that reveals to black on
+ * scroll (word by word). Short rule to the left of the heading. Manrope body +
+ * secondary outline button. Tokens only.
  */
-const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const black = 'Cultureel verzamelgebouw aan de Vaartkom ';
+const grey = '- waar bewoners, voorstellingen, workshops en café samenkomen.';
+const greyWords = grey.split(' ');
+const body = 'Ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occa.';
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">IntroBanner — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">IntroBanner — desktop / mobile<span class="vb-cap-id">#introbanner</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
 
-  <div class="vb-tile-band">
-    <div class="vb-intro">
-      <div class="vb-intro__media">
-        <div class="vb-image" set:html={placeholder}></div>
-      </div>
-      <div class="vb-intro__content">
-        <p class="vb-intro__heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.uspendisse varius enim in eros elementum tristiquernare, eros dolor interdum nulla, ut commodo diam libero vitae eratem lorem ipsum.</p>
-        <a href="#" class="vb-btn vb-btn--primary vb-btn--small">Button primary</a>
-      </div>
+  <div class="vb-introtext" data-reveal>
+    <div class="vb-introtext__banner">
+      <span class="vb-introtext__line" aria-hidden="true"></span>
+      <h2 class="vb-introtext__heading">
+        <span class="vb-introtext__black">{black}</span><span class="vb-introtext__reveal">{greyWords.map((w) => (<span class="vb-rw">{w} </span>))}</span>
+      </h2>
+    </div>
+    <div class="vb-introtext__desc">
+      <p class="vb-introtext__text">{body}</p>
+      <a href="#" class="vb-btn vb-btn--secondary vb-btn--small">Meer over Opek</a>
     </div>
   </div>
 </div>
@@ -29,9 +35,24 @@ const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.o
   (function () {
     document.querySelectorAll('[data-tile]').forEach(function (tile) {
       var t = tile.querySelector('[data-mobile-toggle]');
-      var intro = tile.querySelector('.vb-intro');
-      if (!t || !intro) return;
-      t.addEventListener('change', function () { intro.classList.toggle('is-mobile', t.checked); });
+      var intro = tile.querySelector('.vb-introtext');
+      if (t && intro) t.addEventListener('change', function () { intro.classList.toggle('is-mobile', t.checked); });
+    });
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      var words = Array.prototype.slice.call(el.querySelectorAll('.vb-rw'));
+      if (!words.length) return;
+      function update() {
+        var r = el.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        // progress: 0 when block bottom enters viewport bottom, 1 when block top reaches ~35% of viewport
+        var p = (vh - r.top) / (vh * 0.85);
+        p = Math.max(0, Math.min(1, p));
+        var n = Math.round(p * words.length);
+        for (var i = 0; i < words.length; i++) words[i].classList.toggle('is-on', i < n);
+      }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
     });
   })();
 </script>

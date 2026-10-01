@@ -1,0 +1,31 @@
+---
+/**
+ * ORGANISMS · Hero (navbar/hero) — green band, full OPEK logo left, tagline
+ * right (H3, uppercase). Top + bottom 2px black borders. Figma 18672:20018.
+ * Logo = the footer lockup. Atoms + tokens only.
+ */
+import fullLogo from '../../assets/opek/brand/opek-full-logo.svg?raw';
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Hero — desktop / mobile<span class="vb-cap-id">#hero</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-herob" data-sec>
+    <span class="vb-herob__logo" set:html={fullLogo}></span>
+    <p class="vb-herob__tagline">Hub voor kunst en cultuur aan de Vaartkom in Leuven</p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

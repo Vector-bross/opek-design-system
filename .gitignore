@@ -9,3 +9,7 @@ node_modules/
 .vercel
 *.log
 site-local/
+
+# raw licensed font kits (only public/fonts/webfonts is deployed)
+public/fonts/ITC Kabel/
+public/fonts/Pitch family/

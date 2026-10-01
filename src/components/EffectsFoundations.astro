@@ -5,14 +5,19 @@
  * and reuses existing foundations only.
  */
 const shadows = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
-const radii = ['tiny', 'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
+// OPEK radius scale (Figma): none 0 · tiny 2 · xxxsmall 4 · xxsmall 8 · xsmall 12 · small 16 · medium 24 · xxlarge 64
+const radii = ['none', 'tiny', 'xxxsmall', 'xxsmall', 'xsmall', 'small', 'medium', 'xxlarge'];
+// OPEK aspect ratios (Figma "Img" set)
 const ratios: [string, string][] = [
-  ['16:9', '16 / 9'],
-  ['3:2', '3 / 2'],
-  ['4:3', '4 / 3'],
-  ['5:4', '5 / 4'],
-  ['2:1', '2 / 1'],
   ['1:1', '1 / 1'],
+  ['5:4', '5 / 4'],
+  ['4:5', '4 / 5'],
+  ['4:3', '4 / 3'],
+  ['3:4', '3 / 4'],
+  ['3:2', '3 / 2'],
+  ['2:3', '2 / 3'],
+  ['16:9', '16 / 9'],
+  ['2:1', '2 / 1'],
 ];
 const sides = ['top', 'bottom', 'left', 'right'];
 const TIP_MSG = 'A message which appears when a cursor is positioned over an icon, image, hyperlink, or other element in a graphical user interface.';
@@ -58,7 +63,7 @@ const tipCols = [
       {ratios.map(([label, ar]) => (
         <div class="flex flex-col gap-2">
           <div
-            class="flex w-full items-center justify-center rounded-box border border-base-300 bg-base-300 text-base-content/60"
+            class="flex w-full items-center justify-center border border-base-300 bg-base-300 text-base-content/60"
             style={`aspect-ratio: ${ar};`}
           >
             <span class="font-mono text-xs">{label}</span>

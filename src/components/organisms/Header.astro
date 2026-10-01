@@ -21,52 +21,102 @@ const p1 = 'Elit nisi in eleifend sed nisi. Pulvinar at orci, proin imperdiet co
 const p2 = 'Lorem ipsum dolor sit amet, consectetur adipiscing.';
 const bio = 'Elit nisi in eleifend sed nisi. Pulvinar at orci, proin imperdiet commodo consectetur convallis risus. Sed condimentum enim dignissim adipiscing faucibus consequat, urna. Viverra purus et erat auctor aliquam. Risus, volutpat vulputate.';
 
+// Icons for the header-content block (specs list + external link). Atoms only.
+const iconRaw = import.meta.glob('../../assets/opek/icons/*.svg', { query: '?raw', import: 'default', eager: true });
+const ic = (name: string): string => { const k = Object.keys(iconRaw).find((k) => k.endsWith(`/${name}.svg`)); return k ? (iconRaw[k] as string) : ''; };
+const roomSpecs = [
+  { icon: 'cadre', label: 'Oppervlakte', value: '240 m²' },
+  { icon: 'people', label: 'Capaciteit', value: '196 personen' },
+  { icon: 'lines', label: 'Verdieping', value: 'gelijkvloers' },
+  { icon: 'setting-2', label: 'Technieker', value: 'Verplicht — inbegrepen in de prijs' },
+  { icon: 'clock', label: 'Max. eindtijd', value: '23:00' },
+];
+
 function tileHeader(label: string) { return label; }
 ---
 <div class="flex flex-col gap-8">
 
-  <!-- Title page — image right -->
+  <!-- Header content — with image -->
   <div class="flex flex-col gap-4" data-tile>
     <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Title page · image right — desktop / mobile</span>
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Header content · with image — desktop / mobile<span class="vb-cap-id">#header-content</span></span>
       <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
     </div>
-    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
-      <div class="vb-hdr vb-hdr-title" data-hdr>
-        <div class="vb-hdr-title__content">
-          <div class="vb-hdr-title__text">
-            <div class="vb-hdr-title__col">
-              <p class="vb-hdr-h1 vb-hdr-title__h">Title page</p>
-              <p class="vb-hdr-title__lead">{p1}</p>
-            </div>
-            <p class="vb-hdr-title__p">{p2}</p>
+    <div class="vb-hdrc vb-hdrc--image" data-hdr>
+      <div class="vb-hdrc__inner">
+        <div class="vb-hdrc__content">
+          <div class="vb-hdrc__text">
+            <h1 class="vb-hdrc__title">Agenda</h1>
+            <p class="vb-hdrc__intro">Events, voorstellingen, workshops en kampen in OPEK.</p>
           </div>
-          <div><a href="#" class="vb-btn vb-btn--secondary">Call to action</a></div>
+          <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg vb-hdrc__cta">Call to action</a>
         </div>
-        <div class="vb-hdr-title__media"><div class="vb-image" set:html={placeholder}></div></div>
+        <div class="vb-hdrc__media"><div class="vb-image" set:html={placeholder}></div></div>
       </div>
     </div>
   </div>
 
-  <!-- Title page — image left -->
+  <!-- Header content — no image -->
   <div class="flex flex-col gap-4" data-tile>
     <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Title page · image left — desktop / mobile</span>
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Header content · no image — desktop / mobile<span class="vb-cap-id">#header-content</span></span>
       <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
     </div>
-    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
-      <div class="vb-hdr vb-hdr-title vb-hdr-title--left" data-hdr>
-        <div class="vb-hdr-title__content">
-          <div class="vb-hdr-title__text">
-            <div class="vb-hdr-title__col">
-              <p class="vb-hdr-h1 vb-hdr-title__h">Title page</p>
-              <p class="vb-hdr-title__lead">{p1}</p>
-            </div>
-            <p class="vb-hdr-title__p">{p2}</p>
+    <div class="vb-hdrc vb-hdrc--plain" data-hdr>
+      <div class="vb-hdrc__inner">
+        <div class="vb-hdrc__content">
+          <div class="vb-hdrc__text">
+            <h1 class="vb-hdrc__title">Agenda</h1>
+            <p class="vb-hdrc__intro">Events, voorstellingen, workshops en kampen in OPEK.</p>
           </div>
-          <div><a href="#" class="vb-btn vb-btn--secondary">Call to action</a></div>
+          <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg vb-hdrc__cta">Call to action</a>
         </div>
-        <div class="vb-hdr-title__media"><div class="vb-image" set:html={placeholder}></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header content block — variant 1: text + button -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Header content block · text — desktop / mobile<span class="vb-cap-id">#header-content-block</span></span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hcblock" data-hdr>
+      <div class="vb-hcblock__inner">
+        <div class="vb-hcblock__content">
+          <h2 class="vb-hcblock__title">Café Entrepot</h2>
+          <p class="vb-hcblock__text">Café Entrepot ligt in het hart van het OPEK-gebouw aan de Vaartkom in Leuven. Een plek om tot rust te komen, bij te praten of een hapje te eten — voor bezoekers van het gebouw én voor wie gewoon langskomt voor een drankje of een lunch. Het terras aan het water maakt het helemaal af.</p>
+          <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg vb-hcblock__cta">Bezoek cafeentrepot.be<span class="vb-hcblock__exticon" set:html={ic('export')}></span></a>
+        </div>
+        <div class="vb-hcblock__media"><div class="vb-image" set:html={placeholder}></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header content block — variant 2: specs list -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Header content block · specs — desktop / mobile<span class="vb-cap-id">#header-content-block</span></span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hcblock" data-hdr>
+      <div class="vb-hcblock__inner">
+        <div class="vb-hcblock__content">
+          <div class="vb-hcblock__head">
+            <h2 class="vb-hcblock__title">Grote zaal</h2>
+            <span class="vb-tag vb-hcblock__tag">Theaterzaal</span>
+          </div>
+          <ul class="vb-hcblock__specs">
+            {roomSpecs.map((s) => (
+              <li class="vb-hcblock__spec">
+                <span class="vb-hcblock__speclabel"><span class="vb-hcblock__specicon" set:html={ic(s.icon)}></span>{s.label}</span>
+                <span class="vb-hcblock__specval">{s.value}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg vb-hcblock__cta">Zaal aanvragen</a>
+        </div>
+        <div class="vb-hcblock__media"><div class="vb-image" set:html={placeholder}></div></div>
       </div>
     </div>
   </div>
@@ -74,137 +124,18 @@ function tileHeader(label: string) { return label; }
   <!-- Blog -->
   <div class="flex flex-col gap-4" data-tile>
     <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Blog — desktop / mobile</span>
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Blog — desktop / mobile<span class="vb-cap-id">#blog</span></span>
       <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
     </div>
-    <div class="vb-hdr-band vb-hdr-band--light">
-      <div class="vb-hdr vb-hdr--tight vb-hdr-blog" data-hdr>
-        <div class="vb-hdr-blog__wrap">
-          <p class="vb-hdr-blog__date">01/01/2026</p>
-          <div class="vb-hdr-blog__head">
-            <p class="vb-hdr-h1 vb-hdr-blog__title">Blog title heading will go here lorem ipsum dolor sitamet</p>
-            <div class="vb-hdr-blog__meta">
-              <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
-              <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
-            </div>
-          </div>
+    <div class="vb-hdr-blog" data-hdr>
+      <div class="vb-hdr-blog__content">
+        <div class="vb-hdr-blog__slot">
+          <p class="vb-hdr-blog__date">wo 24 jun 2026</p>
+          <p class="vb-hdr-blog__title">Nulla pariatur xcepteur sint occaecat cupidata lorem</p>
         </div>
-        <div class="vb-hdr-blog__img"><div class="vb-image" set:html={placeholder}></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Job header -->
-  <div class="flex flex-col gap-4" data-tile>
-    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Job — desktop / mobile</span>
-      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-    </div>
-    <div class="vb-hdr-band vb-hdr-band--body">
-      <div class="vb-hdr vb-hdr-job" data-hdr style="padding-block: var(--vb-spacer-8);">
-        <div class="vb-hdr-job__content">
-          <p class="vb-hdr-h1 vb-hdr-job__title">Job title description here</p>
-          <div class="vb-hdr-job__meta">
-            <span class="vb-hdr-job__meta-item"><span class="vb-hdr-job__meta-label">Type:</span><span class="vb-hdr-job__meta-val">Fulltime</span></span>
-            <span class="vb-hdr-job__meta-item"><span class="vb-hdr-job__meta-label">Location:</span><span class="vb-hdr-job__meta-val">Leuven</span></span>
-          </div>
-        </div>
-        <div class="vb-hdr-job__aside">
-          <a href="#" class="vb-btn vb-btn--primary">Apply for this position</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Person profile (dark) -->
-  <div class="flex flex-col gap-4" data-tile>
-    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Person profile — desktop / mobile</span>
-      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-    </div>
-    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
-      <div class="vb-hdr vb-hdr--tight vb-hdr-split vb-hdr-split--media-first" data-hdr>
-        <p class="vb-hdr-h1 vb-hdr-split__title">Firstname Lastname</p>
-        <div class="vb-hdr-split__row">
-          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
-          <div class="vb-hdr-card vb-hdr-card--white">
-            <div class="vb-hdr-card__inner vb-hdr-card__inner--person">
-              <div class="vb-hdr-person__addr">
-                <div class="vb-hdr-person__id">
-                  <p class="vb-hdr-h5">Firstname Lastname</p>
-                  <p class="vb-hdr-func">Long function, company</p>
-                </div>
-                <p class="vb-hdr-contact">+32 12 34 56 78<br /><a class="vb-hdr-email" href="mailto:name@email.com">name@email.com</a></p>
-              </div>
-              <div class="vb-hdr-person__para">
-                <p class="vb-hdr-para">{bio}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Location detail (light) -->
-  <div class="flex flex-col gap-4" data-tile>
-    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Location detail — desktop / mobile</span>
-      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-    </div>
-    <div class="vb-hdr-band vb-hdr-band--light">
-      <div class="vb-hdr vb-hdr--tight vb-hdr-split" data-hdr>
-        <p class="vb-hdr-h1 vb-hdr-split__title--dark">Location detail</p>
-        <div class="vb-hdr-split__row">
-          <div class="vb-hdr-card vb-hdr-card--bordered">
-            <div class="vb-hdr-card__inner">
-              <p class="vb-hdr-h4">Location name</p>
-              <div class="vb-hdr-stack">
-                <p class="vb-hdr-lines">Streetname 01</p>
-                <p class="vb-hdr-lines">1000 City name</p>
-              </div>
-              <div class="vb-hdr-stack">
-                <p class="vb-hdr-contact">+32 12 34 56 78</p>
-                <a class="vb-hdr-contact vb-hdr-email" href="mailto:name@email.com">name@email.com</a>
-              </div>
-              <div class="vb-hdr-socials">
-                {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
-              </div>
-            </div>
-          </div>
-          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact us (light) -->
-  <div class="flex flex-col gap-4" data-tile>
-    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Contact us — desktop / mobile</span>
-      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-    </div>
-    <div class="vb-hdr-band vb-hdr-band--light">
-      <div class="vb-hdr vb-hdr--tight vb-hdr-split" data-hdr>
-        <p class="vb-hdr-h1 vb-hdr-split__title--dark">Contact us</p>
-        <div class="vb-hdr-split__row">
-          <div class="vb-hdr-card vb-hdr-card--bordered">
-            <div class="vb-hdr-card__inner">
-              <span class="vb-hdr-card__logo" set:html={logo}></span>
-              <div class="vb-hdr-stack">
-                <p class="vb-hdr-lines">Streetname 01</p>
-                <p class="vb-hdr-lines">1000 City name</p>
-              </div>
-              <div class="vb-hdr-stack">
-                <p class="vb-hdr-contact">+32 12 34 56 78</p>
-                <a class="vb-hdr-contact vb-hdr-email" href="mailto:name@email.com">name@email.com</a>
-              </div>
-              <div class="vb-hdr-socials">
-                {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
-              </div>
-            </div>
-          </div>
-          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
+        <div class="vb-hdr-blog__media">
+          <div class="vb-hdr-blog__img"><div class="vb-image" set:html={placeholder}></div></div>
+          <p class="vb-hdr-blog__caption">© Caption here</p>
         </div>
       </div>
     </div>

@@ -1,0 +1,44 @@
+---
+/**
+ * ORGANISMS · Section-stats (#stats-block) — "OPEK in cijfers".
+ * Faithful to Figma 18608:20025. White, max-width 1280, 50/50: title left,
+ * 2×2 stats grid right (collapsed 1px black borders, big green numbers = H1).
+ * Atoms + tokens only.
+ */
+const stats = [
+  { num: '+200', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  { num: '50%', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  { num: '456', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  { num: '19%', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Section · stats — desktop / mobile<span class="vb-cap-id">#stats-block</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-statblock" data-sec>
+    <h2 class="vb-statblock__title">OPEK in cijfers</h2>
+    <div class="vb-statblock__grid">
+      {stats.map((s) => (
+        <div class="vb-statblock__cell">
+          <span class="vb-statblock__num">{s.num}</span>
+          <p class="vb-statblock__text">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

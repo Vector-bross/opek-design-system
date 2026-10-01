@@ -22,57 +22,70 @@ export interface RegistryEntry {
   status?: 'stable' | 'beta';
   /** Link to the source node in Figma (paste the node URL per component). */
   figma?: string;
+  /** OPEK Figma node id (e.g. "12432:7490") — filled as each component is matched to its node. */
+  figmaNode?: string;
 }
 
+/** OPEK Figma file. */
+export const OPEK_FILE = 'c1OVSyR5fUyP17SrkeAkYd';
+/** Build an OPEK Figma deep-link from a node id ("123:456" or "123-456"). */
+export const figmaUrl = (node?: string) =>
+  node ? `https://www.figma.com/design/${OPEK_FILE}/opek-v01?node-id=${node.replace(':', '-')}` : undefined;
+
 export const categories: { id: string; label: string; description: string }[] = [
-  { id: 'navigation', label: 'Navigation', description: 'Navigation bars and breadcrumbs.' },
+  { id: 'navigation', label: 'Navigation', description: 'Navbars, breadcrumb, anchor nav and filters.' },
   { id: 'headers', label: 'Headers & Heroes', description: 'Page headers and hero banners.' },
-  { id: 'content', label: 'Content sections', description: 'Content blocks: news, team, services, stats and more.' },
+  { id: 'events', label: 'Events', description: 'Agenda and event listings.' },
+  { id: 'cards', label: 'News, team & cards', description: 'News, team and related card grids.' },
+  { id: 'portals', label: 'Portals & logos', description: 'Entry-point doors and the residents/logos grid.' },
+  { id: 'content', label: 'Content & media', description: 'Rich text, gallery, quotes, stats and intro bands.' },
+  { id: 'cta', label: 'Call to action', description: 'Conversion bands, small and large.' },
   { id: 'forms', label: 'Forms & contact', description: 'Forms, newsletter and contact blocks.' },
-  { id: 'faq', label: 'FAQ', description: 'Frequently asked questions.' },
-  { id: 'careers', label: 'Careers', description: 'Job openings.' },
-  { id: 'overlays', label: 'Overlays', description: 'Modals and overlays.' },
+  { id: 'careers', label: 'Careers', description: 'Vacancies and open calls.' },
   { id: 'footers', label: 'Footers', description: 'Page footers.' },
 ];
 
 export const registry: RegistryEntry[] = [
   // Navigation
-  { id: 'navbar', name: 'Navbar', description: 'Main navigation bar (menu, Services dropdown, language switcher, meta bar) with a mobile variant.', category: 'navigation', atomicLevel: 'organism', tags: ['nav', 'menu', 'dropdown', 'mobile'], deps: ['Logo', 'Button', 'Caret'], usage: 'At the top of every page. The Services dropdown and the EN/FR/NL switcher open on hover; the mobile variant opens a full-screen panel.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15484-888' },
-  { id: 'breadcrumb', name: 'Breadcrumb', description: 'Chip-style breadcrumb trail (Home / Level / Current).', category: 'navigation', atomicLevel: 'organism', tags: ['breadcrumb', 'nav'], deps: ['Tag', 'Caps'], usage: 'Below the navigation, to place the page within the site hierarchy.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=12430-59639' },
+  { id: 'navbar', name: 'Navbar', description: 'Main navigation bar (menu, Services dropdown, language switcher, meta bar) with a mobile variant.', category: 'navigation', atomicLevel: 'organism', tags: ['nav', 'menu', 'dropdown', 'mobile'], deps: ['Logo', 'Button', 'Caret'], usage: 'At the top of every page. The Services dropdown and the EN/FR/NL switcher open on hover; the mobile variant opens a full-screen panel.', figmaNode: '12432:7490' },
+  { id: 'breadcrumb', name: 'Breadcrumb', description: 'Breadcrumb trail on a green bar (Home / … / current).', category: 'navigation', atomicLevel: 'organism', tags: ['breadcrumb', 'nav'], deps: ['Caps'], usage: 'Below the navigation, to place the page within the site hierarchy.', figmaNode: '18263:11516' },
+  { id: 'anchor-navbar', name: 'AnchorNavbar', description: 'Sticky in-page anchor bar (brown) with white caps links and an active underline.', category: 'navigation', atomicLevel: 'organism', tags: ['anchor', 'nav', 'jump', 'toc'], deps: ['Caps'], usage: 'Below the breadcrumb on long pages, to jump between sections.', figmaNode: '18591:18202' },
+  { id: 'filters', name: 'Filters', description: 'Faceted filter panel (teal groups) with radios and checkboxes.', category: 'navigation', atomicLevel: 'organism', tags: ['filters', 'facets', 'radio', 'checkbox'], deps: ['Radio', 'Checkbox'], usage: 'Sidebar of listing pages (agenda, residents) to filter results.', figmaNode: '18591:17771' },
 
   // Headers & Heroes
-  { id: 'hero', name: 'Hero banner', description: 'Full-width hero banner: With image (light) and With background (dark).', category: 'headers', atomicLevel: 'organism', tags: ['hero', 'banner', 'cta'], deps: ['Button', 'Image'], usage: 'First section of a landing page. Full-bleed background, content capped at 1120px.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15559-29048' },
-  { id: 'header', name: 'Header', description: 'Page headers: Title page (image left/right), Blog, Job, Person profile, Location detail, Contact us.', category: 'headers', atomicLevel: 'organism', tags: ['header', 'title', 'blog', 'contact'], deps: ['Button', 'Tag', 'Image', 'Social', 'Logo'], usage: 'Inner-page header depending on the content type.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15669-11468' },
+  { id: 'header', name: 'Header Content', description: 'Page header (green): title + intro + CTA, with or without image; plus Blog and Job headers.', category: 'headers', atomicLevel: 'organism', tags: ['header', 'title', 'blog', 'contact'], deps: ['Button', 'Tag', 'Image', 'Social', 'Logo'], usage: 'Inner-page header depending on the content type.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15669-11468' },
+  { id: 'hero', name: 'Hero (brand)', description: 'Home hero: green band, 2px top/bottom borders, brand logo + right-aligned tagline (H3).', category: 'headers', atomicLevel: 'organism', tags: ['hero', 'home', 'brand', 'logo'], deps: ['Logo'], usage: 'Top of the homepage.', figmaNode: '18672:20018' },
 
-  // Content sections
-  { id: 'news-section', name: 'News section', description: 'Grid of blog cards with a “View all” link. Horizontal slider on mobile.', category: 'content', atomicLevel: 'section', tags: ['news', 'blog', 'cards', 'slider'], deps: ['Card', 'Tag', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15615-29522' },
-  { id: 'team-section', name: 'Team section', description: 'Grid of team-member cards with a “View all” link. Slider on mobile.', category: 'content', atomicLevel: 'section', tags: ['team', 'cards', 'slider'], deps: ['Card', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12310' },
-  { id: 'usp-section', name: 'Why us? section', description: 'Grid of ServiceTiles (icon + title + text).', category: 'content', atomicLevel: 'section', tags: ['usp', 'features', 'icons'], deps: ['ServiceTile'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12313' },
-  { id: 'services-section', name: 'Services section', description: 'List of horizontal cards.', category: 'content', atomicLevel: 'section', tags: ['services', 'cards'], deps: ['Card horizontal', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12314' },
-  { id: 'stats-section', name: 'Stats section', description: 'Key figures (large numbers) with images, three columns.', category: 'content', atomicLevel: 'section', tags: ['stats', 'numbers'], deps: ['Image'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12311' },
-  { id: 'locations-section', name: 'Locations section', description: 'Grid of location cards (two columns). Slider on mobile.', category: 'content', atomicLevel: 'section', tags: ['locations', 'cards', 'slider'], deps: ['Card', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15661-31935' },
-  { id: 'brands-section', name: 'Brands section', description: 'Partner grid; each logo turns blue on hover (name + url).', category: 'content', atomicLevel: 'section', tags: ['partners', 'logos'], deps: ['Logo'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12312' },
+  // Events
+  { id: 'events', name: 'Events', description: 'Featured event card + list of horizontal event cards (tags, meta with icons), outline CTA.', category: 'events', atomicLevel: 'section', tags: ['events', 'agenda', 'cards'], deps: ['Tag', 'Icon', 'Image', 'Button'], figmaNode: '18261:12273' },
+  { id: 'events-hall', name: 'Events — hall', description: 'Teal band, 2×2 grid of full event cards (square image, category tag, meta, title, price).', category: 'events', atomicLevel: 'section', tags: ['events', 'hall', 'cards'], deps: ['Tag', 'Icon', 'Image'], figmaNode: '18281:16219' },
 
-  { id: 'intro-banner', name: 'IntroBanner', description: 'Full-width intro band (dark): image beside a short heading and a primary button.', category: 'content', atomicLevel: 'molecule', tags: ['intro', 'banner', 'media'], deps: ['Image', 'Button'], usage: 'Short introduction band near the top of a page.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15479-27042' },
+  // News, team & cards
+  { id: 'news-section', name: 'News section', description: '“Laatste nieuws”: 3 vertical news cards (image, date, title, excerpt) with outline CTA. Responsive 3→2→1.', category: 'cards', atomicLevel: 'section', tags: ['news', 'blog', 'cards'], deps: ['Image', 'Button'], figmaNode: '18261:12271' },
+  { id: 'news-related', name: 'Related news', description: '“Andere nieuws”: dark teal variant of the news section with a white outline CTA.', category: 'cards', atomicLevel: 'section', tags: ['news', 'related', 'cards'], deps: ['Image', 'Button'], figmaNode: '18369:16399' },
+  { id: 'rooms-related', name: 'Related rooms', description: '“Andere ruimtes”: teal band, 3 room cards (image, tag, name, info, small CTA) + global CTA.', category: 'cards', atomicLevel: 'section', tags: ['rooms', 'spaces', 'cards'], deps: ['Tag', 'Image', 'Button'], figmaNode: '18369:16398' },
+  { id: 'team-section', name: 'Team section', description: '“Team”: teal band, 3 vertical cards (portrait, name, role). Responsive 3→2→1.', category: 'cards', atomicLevel: 'section', tags: ['team', 'cards'], deps: ['Image'], figmaNode: '18286:16096' },
+
+  // Portals & logos
+  { id: 'portals', name: 'Portals (usps)', description: 'Full-width band of 4 coloured doors (title + icon + caps link), responsive auto-fit grid with 2px borders.', category: 'portals', atomicLevel: 'section', tags: ['portals', 'usp', 'doors', 'cta'], deps: ['Button', 'Icon'], usage: 'Home / landing entry points to the main site areas.', figmaNode: '18261:12269' },
+  { id: 'logos', name: 'Logos / bewoners', description: '“OPEK is een verzamelgebouw”: intro + destructured logo grid with hover rollover (teal + “Ontdek” CTA).', category: 'portals', atomicLevel: 'section', tags: ['logos', 'residents', 'grid', 'rollover'], deps: ['Button', 'Image'], figmaNode: '18541:21182' },
+
+  // Content & media
   { id: 'text-content', name: 'Text content', description: 'Rich content block: display title, intro, alternating media objects and a “View all” action.', category: 'content', atomicLevel: 'organism', tags: ['text', 'content', 'rich', 'media'], deps: ['MediaObject', 'Button'], usage: 'Long-form editorial content on pages (About, detail pages). Composes the MediaObject molecule.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15690-36591' },
-  { id: 'quote', name: 'Quote', description: 'Testimonial band (grey): quote text, author with avatar, and prev/next arrows cycling several quotes.', category: 'content', atomicLevel: 'molecule', tags: ['quote', 'testimonial', 'slider'], deps: ['Avatar', 'Button'], usage: 'Social proof / testimonials on a page.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15536-11676' },
-  { id: 'gallery', name: 'Gallery', description: 'Full-width image gallery (dark band): heading and a slider of images with dots and arrows.', category: 'content', atomicLevel: 'molecule', tags: ['gallery', 'slider', 'images'], deps: ['Image'], usage: 'Image galleries on detail pages.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15690-35017' },
-  { id: 'cta-small', name: 'CTA — small', description: 'Call-to-action with media: heading, text and a primary button beside an image.', category: 'content', atomicLevel: 'molecule', tags: ['cta', 'call to action', 'media'], deps: ['Button', 'Image'], usage: 'Mid-page conversion prompt with a supporting image.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15506-888' },
   { id: 'ckeditor', name: 'CKEditor styles', description: 'Rich-text (CKEditor output) styles: H1–H6, lead, paragraphs, links, bullet & numbered lists, gallery, table, testimonial, buttons and a questions banner.', category: 'content', atomicLevel: 'organism', tags: ['rich text', 'ckeditor', 'prose', 'wysiwyg'], deps: ['TextList', 'NumberedList', 'Table', 'Quote', 'CTA', 'Button'], usage: 'The styles applied to CMS rich-text (CKEditor) output on blog / detail pages.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=14278-85431' },
-  { id: 'cta-large', name: 'CTA — large', description: 'Full-width call-to-action: dark panel (heading, text, primary button) beside a large image.', category: 'content', atomicLevel: 'molecule', tags: ['cta', 'call to action', 'banner'], deps: ['Button', 'Image'], usage: 'Strong end-of-page conversion band.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15506-889' },
+  { id: 'gallery', name: 'Gallery', description: 'Square image grid with hover rollover; clicking opens an accessible lightbox (prev/next, Esc, swipe on mobile).', category: 'content', atomicLevel: 'section', tags: ['gallery', 'images', 'lightbox', 'modal'], deps: ['Image'], figmaNode: '18591:18189' },
+  { id: 'quote', name: 'Quote', description: 'Testimonial band (grey): quote text, author with avatar, and prev/next arrows cycling several quotes.', category: 'content', atomicLevel: 'molecule', tags: ['quote', 'testimonial', 'slider'], deps: ['Avatar', 'Button'], usage: 'Social proof / testimonials on a page.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15536-11676' },
+  { id: 'intro-banner', name: 'IntroBanner', description: 'Full-width intro band (dark): image beside a short heading and a primary button.', category: 'content', atomicLevel: 'molecule', tags: ['intro', 'banner', 'media'], deps: ['Image', 'Button'], usage: 'Short introduction band near the top of a page.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15479-27042' },
 
-  // FAQ
-  { id: 'faq-section', name: 'FAQ section', description: 'Title with an interactive accordion (expand/collapse).', category: 'faq', atomicLevel: 'section', tags: ['faq', 'accordion'], deps: ['Accordion'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15594-12309' },
-
-  // Careers
-  { id: 'jobs-section', name: 'Jobs section', description: 'List of job openings (JobOpening).', category: 'careers', atomicLevel: 'section', tags: ['jobs', 'careers'], deps: ['JobOpening', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15661-31869' },
+  // Call to action
+  { id: 'cta-with-media', name: 'CTA with media', description: 'Full-bleed coloured band (image left + title, text, buttons right). Colour variants: location (brown), highlights (magenta), info (UiTPAS).', category: 'cta', atomicLevel: 'molecule', tags: ['cta', 'call to action', 'media', 'cta-with-media'], deps: ['Button', 'Image'], usage: 'Mid-page conversion / info prompt with a supporting image. Same molecule shown in Molecules (Cards & CTA).', figmaNode: '18652:19618' },
+  { id: 'cta-with-media-large', name: 'CTA with media — large', description: 'Full-width call-to-action with media: coloured panel (heading, text, primary button) beside a large image.', category: 'cta', atomicLevel: 'molecule', tags: ['cta', 'call to action', 'media', 'banner', 'cta-with-media'], deps: ['Button', 'Image'], usage: 'Strong end-of-page conversion band.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15506-889' },
 
   // Forms & contact
-  { id: 'newsletter', name: 'Newsletter', description: 'Sign-up block (email field + button + terms).', category: 'forms', atomicLevel: 'organism', tags: ['newsletter', 'form'], deps: ['Input', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15506-890' },
-  { id: 'form-section', name: 'Form section', description: 'Apply / Contact form on a dark background (fields, CV upload, checkbox).', category: 'forms', atomicLevel: 'section', tags: ['form', 'contact', 'apply'], deps: ['Field', 'Input', 'Upload', 'Checkbox', 'Button'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15690-35599' },
+  { id: 'contact-form', name: 'Contact form', description: 'Two-column contact band (teal): left title/intro, right form card on white (436/780). OPEK “Forms”.', category: 'forms', atomicLevel: 'section', tags: ['form', 'contact', 'question'], deps: ['Field', 'Input', 'Button'], figmaNode: '18591:18047' },
 
-  // Overlays
-  { id: 'modal', name: 'Modal', description: 'Modal window (image, title, text, CTA) with overlay and close.', category: 'overlays', atomicLevel: 'organism', tags: ['modal', 'overlay', 'dialog'], deps: ['Button', 'Image'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15753-38004' },
+  // Careers
+  { id: 'vacatures', name: 'Vacatures', description: '“Werk mee bij de bewoners”: bordered list of job rows (title + tag + deadline / lead + description + CTA), global CTA.', category: 'careers', atomicLevel: 'section', tags: ['jobs', 'careers', 'vacatures'], deps: ['Tag', 'Button'], figmaNode: '18368:16363' },
 
   // Footers
   { id: 'footer', name: 'Footer', description: 'Page footer: brand + contact + socials, three menu columns, credits.', category: 'footers', atomicLevel: 'organism', tags: ['footer'], deps: ['Logo', 'Social', 'Signature'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15387-889' },

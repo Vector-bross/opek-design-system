@@ -1,0 +1,72 @@
+---
+/**
+ * ORGANISMS · Logos / bewoners (#logos) — "OPEK is een verzamelgebouw".
+ * Teal band. Intro (title display-2 + intro text + button + square image),
+ * then a DESTRUCTURED logo grid (4 cols desktop, specific filled pattern with
+ * empty cells) with a ROLLOVER on each tile (hover → teal fill + "Ontdek" CTA +
+ * link icon). Reflows to 3/2 cols on narrow. Figma 18541:21182 (desktop),
+ * 18301:17807 (mobile). Atoms/molecules/tokens only.
+ * NOTE: real resident logos are 3rd-party brands — placeholders shown here;
+ * real logos/names are injected via CMS.
+ */
+import iLink from '../../assets/opek/icons/icon-link.svg?raw';
+const imgPlaceholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+// Desktop destructured placement (col/row 1-based) + which outer borders to draw.
+// Base tile always draws top+left; add right (r) / bottom (b) on the pattern edges.
+const tiles = [
+  { col: 2, row: 1 },
+  { col: 3, row: 1 },
+  { col: 4, row: 1, b: 'r' },
+  { col: 1, row: 2 },
+  { col: 2, row: 2 },
+  { col: 3, row: 2, b: 'b' },
+  { col: 4, row: 2, b: 'rb' },
+  { col: 1, row: 3, b: 'b' },
+  { col: 2, row: 3, b: 'rb' },
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Logos / bewoners — desktop / mobile<span class="vb-cap-id">#logos</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-logos" data-sec>
+    <div class="vb-logos__inner">
+      <div class="vb-logos__intro">
+        <div class="vb-logos__text">
+          <h2 class="vb-logos__title">OPEK is een verzamelgebouw</h2>
+          <div class="vb-logos__cta on-dark">
+            <p class="vb-logos__desc"><strong>9 bewoners</strong> maken er samen het huis &mdash; van theater en dans tot kunstuitleen en workshops.</p>
+            <a href="#" class="vb-btn vb-btn--secondary">Alle bewoner</a>
+          </div>
+        </div>
+        <div class="vb-logos__img"><div class="vb-image" set:html={imgPlaceholder}></div></div>
+      </div>
+
+      <div class="vb-logos__grid">
+        {tiles.map((t) => (
+          <div class={`vb-logotile${t.b ? ' vb-logotile--' + t.b : ''}`} style={`grid-column:${t.col};grid-row:${t.row}`}>
+            <span class="vb-logotile__logo">Logo</span>
+            <span class="vb-logotile__hover on-dark">
+              <span class="vb-btn vb-btn--secondary vb-btn--small">Ontdek</span>
+              <span class="vb-logotile__icon" set:html={iLink}></span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

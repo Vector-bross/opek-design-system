@@ -3,9 +3,9 @@
  * MOLECULES — Tiles / NumberedList. Numbered atom badges (01..) + blue text.
  * Poppins SemiBold 20 #004cff, subtle dividers. Badges align to the first line.
  */
-import n1 from '../../assets/icons/numbered/01.svg?raw';
-import n2 from '../../assets/icons/numbered/02.svg?raw';
-import n3 from '../../assets/icons/numbered/03.svg?raw';
+import n1 from '../../assets/opek/icons/numbered/1.svg?raw';
+import n2 from '../../assets/opek/icons/numbered/2.svg?raw';
+import n3 from '../../assets/opek/icons/numbered/3.svg?raw';
 const items = [
   { badge: n1, text: 'Dolor enim eu tortor urna sed duis nullaliquam vestibulum' },
   { badge: n2, text: 'Proin imperdiet commodo consectetur convallis risus' },
@@ -14,10 +14,10 @@ const items = [
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">NumberedList — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">NumberedList — desktop / mobile<span class="vb-cap-id">#numberedlist</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
-  <div class="rounded-box border border-base-300 bg-base-100 p-8">
+  <div>
     <ul class="vb-numlist">
       {items.map((it) => (
         <li class="vb-numlist__item">

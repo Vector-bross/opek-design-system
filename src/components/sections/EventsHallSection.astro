@@ -1,0 +1,60 @@
+---
+/**
+ * ORGANISMS · Events — hall variant (#events-hall) — "Geplande events in deze zaal".
+ * Dark teal band, H2 white title, 2×2 bordered grid of full event cards
+ * (square image left + category tag top-right + meta + title + price). Second
+ * events presentation. Figma 18281:16219. Atoms/molecules/tokens only.
+ */
+import iDate from '../../assets/opek/icons/calendar.svg?raw';
+import iVenue from '../../assets/opek/icons/courthouse.svg?raw';
+import iRoom from '../../assets/opek/icons/location-sharp.svg?raw';
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const cards = [1, 2, 3, 4];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Events — hall (2×2)<span class="vb-cap-id">#events-hall</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-eventsh" data-sec>
+    <div class="vb-eventsh__inner">
+      <h2 class="vb-eventsh__title">Geplande events in deze zaal</h2>
+
+      <div class="vb-eventsh__grid">
+        {cards.map(() => (
+          <article class="vb-evcard2">
+            <div class="vb-evcard2__img"><div class="vb-image" set:html={placeholder}></div></div>
+            <div class="vb-evcard2__content">
+              <span class="vb-tag vb-tag--green vb-evcard2__tag">Voorstellingen</span>
+              <div class="vb-evmeta">
+                <span class="vb-evmeta__item vb-evmeta__item--full">
+                  <span class="vb-evmeta__icon" set:html={iDate}></span>wo 24 jun 2026
+                  <span class="vb-evmeta__accent">(meerdere datums)</span>
+                </span>
+                <span class="vb-evmeta__item"><span class="vb-evmeta__icon" set:html={iVenue}></span>Degarage</span>
+                <span class="vb-evmeta__item"><span class="vb-evmeta__icon" set:html={iRoom}></span>Grote zaal</span>
+              </div>
+              <div class="vb-evcard2__details">
+                <h3 class="vb-evcard2__name">Theatervoorstelling</h3>
+                <p class="vb-evcard2__price">Gratis</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

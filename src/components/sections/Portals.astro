@@ -1,0 +1,49 @@
+---
+/**
+ * ORGANISMS · Portals (usps) — full-width band, 4 equal colored doors (25%),
+ * each: H4 title + icon top, caps link bottom. Figma 18261:12269 (desktop),
+ * 18300:17031 (mobile). Atoms/molecules/tokens only.
+ */
+import calendar from '../../assets/opek/icons/calendar.svg?raw';
+import person from '../../assets/opek/icons/accessibility.svg?raw';
+import building from '../../assets/opek/icons/courthouse.svg?raw';
+import forks from '../../assets/opek/icons/forks.svg?raw';
+const doors = [
+  { mod: 'green', title: 'Iets beleven', icon: calendar, link: 'Bekijk de agenda' },
+  { mod: 'terracotta', title: 'Zelf meedoen', icon: person, link: 'Open calls & vacatures' },
+  { mod: 'teal', title: 'Een ruimte huren', icon: building, link: '11 ruimtes te huur' },
+  { mod: 'brown', title: 'Iets drinken of eten', icon: forks, link: 'Café Entrepot' },
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Portals (usps) — desktop / mobile<span class="vb-cap-id">#portals</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-portals-band">
+    <div class="vb-portals" data-sec>
+      {doors.map((d) => (
+        <div class={`vb-portals__cell vb-portals__cell--${d.mod}`}>
+          <div class="vb-portals__top">
+            <h3 class="vb-portals__title">{d.title}</h3>
+            <span class="vb-portals__icon" set:html={d.icon}></span>
+          </div>
+          <a href="#" class="vb-portals__link">{d.link}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

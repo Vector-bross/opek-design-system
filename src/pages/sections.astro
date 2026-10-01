@@ -1,49 +1,72 @@
 ---
 import PortalShell from '../layouts/PortalShell.astro';
+import Portals from '../components/sections/Portals.astro';
+import EventsSection from '../components/sections/EventsSection.astro';
+import EventsHallSection from '../components/sections/EventsHallSection.astro';
 import NewsSection from '../components/sections/NewsSection.astro';
+import NewsRelatedSection from '../components/sections/NewsRelatedSection.astro';
+import RoomsRelatedSection from '../components/sections/RoomsRelatedSection.astro';
+import VacaturesSection from '../components/sections/VacaturesSection.astro';
+import LogosSection from '../components/sections/LogosSection.astro';
+import GallerySection from '../components/sections/GallerySection.astro';
 import TeamSection from '../components/sections/TeamSection.astro';
-import UspSection from '../components/sections/UspSection.astro';
-import ServicesSection from '../components/sections/ServicesSection.astro';
-import JobsSection from '../components/sections/JobsSection.astro';
-import LocationsSection from '../components/sections/LocationsSection.astro';
 ---
-<PortalShell title="Page sections 1 — Kickstart Theme" active="sections">
+<PortalShell title="Organisms — Page sections — Opek - Design System" active="sections">
 
   <div class="vb-lib__head">
-    <h1 class="vb-lib__title">Page sections 1</h1>
+    <h1 class="vb-lib__title">Organisms &mdash; Page sections</h1>
   </div>
 
   <div class="flex flex-col gap-12">
-    
+
+    <section id="portals" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Portals (usps)</h2>
+      <Portals />
+    </section>
+
+    <section id="events" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Events</h2>
+      <EventsSection />
+    </section>
+
+    <section id="events-hall" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Events — hall</h2>
+      <EventsHallSection />
+    </section>
 
     <section id="news" class="scroll-mt-28 flex flex-col gap-6">
       <h2 class="text-3xl font-semibold tracking-tight">News section</h2>
       <NewsSection />
     </section>
 
+    <section id="news-related" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Related news (Andere nieuws)</h2>
+      <NewsRelatedSection />
+    </section>
+
+    <section id="rooms-related" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Related rooms (Andere ruimtes)</h2>
+      <RoomsRelatedSection />
+    </section>
+
+    <section id="vacatures" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Vacatures (Werk mee)</h2>
+      <VacaturesSection />
+    </section>
+
+    <section id="logos" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Logos / bewoners</h2>
+      <LogosSection />
+    </section>
+
+    <section id="gallery" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Gallery</h2>
+      <GallerySection />
+    </section>
+
     <section id="team" class="scroll-mt-28 flex flex-col gap-6">
       <h2 class="text-3xl font-semibold tracking-tight">Team section</h2>
       <TeamSection />
-    </section>
-
-    <section id="usp" class="scroll-mt-28 flex flex-col gap-6">
-      <h2 class="text-3xl font-semibold tracking-tight">Why us? section</h2>
-      <UspSection />
-    </section>
-
-    <section id="services" class="scroll-mt-28 flex flex-col gap-6">
-      <h2 class="text-3xl font-semibold tracking-tight">Services section</h2>
-      <ServicesSection />
-    </section>
-
-    <section id="jobs" class="scroll-mt-28 flex flex-col gap-6">
-      <h2 class="text-3xl font-semibold tracking-tight">Jobs section</h2>
-      <JobsSection />
-    </section>
-
-    <section id="locations" class="scroll-mt-28 flex flex-col gap-6">
-      <h2 class="text-3xl font-semibold tracking-tight">Locations section</h2>
-      <LocationsSection />
     </section>
   </div>
 

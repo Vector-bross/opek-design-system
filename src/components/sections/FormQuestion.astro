@@ -1,0 +1,71 @@
+---
+/**
+ * ORGANISMS · FormQuestion (#forms) — "Stel je vraag" contact form.
+ * Faithful to Figma 18591:18047. Dark teal band, white title left, white form
+ * card right. Reuses field / select / checkbox / button atoms. Tokens only.
+ */
+import chevron from '../../assets/icons/caret-down.svg?raw';
+import tick from '../../assets/icons/tick.svg?raw';
+const topics = ['Algemene vraag', 'Zaalverhuur', 'Pers & communicatie', 'Vacatures'];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Form · Stel je vraag — desktop / mobile<span class="vb-cap-id">#forms</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-formq-band">
+    <div class="vb-formq" data-sec>
+      <div class="vb-formq__intro">
+        <h2 class="vb-formq__title">Stel je vraag</h2>
+      </div>
+      <form class="vb-form vb-form--light" onsubmit="return false">
+        <label class="vb-field">
+          <span class="vb-field__label">Ik heb een vraag over *</span>
+          <details class="vb-select" data-select>
+            <summary><span class="vb-select__value">Algemene vraag</span><span class="vb-select__chev" set:html={chevron}></span></summary>
+            <div class="vb-select__menu">
+              {topics.map((o) => (<div class="vb-select__opt" role="option" aria-selected="false">{o}</div>))}
+            </div>
+          </details>
+        </label>
+
+        <h3 class="vb-form__subhead">Jouw gegevens</h3>
+        <label class="vb-field"><span class="vb-field__label">Naam *</span><input class="vb-input" type="text" /></label>
+        <label class="vb-field"><span class="vb-field__label">E-mailadres *</span><input class="vb-input" type="email" /></label>
+        <label class="vb-field"><span class="vb-field__label">Telefoon</span><input class="vb-input" type="tel" /></label>
+        <label class="vb-field"><span class="vb-field__label">Je bericht *</span><textarea class="vb-input vb-form__msg"></textarea></label>
+
+        <div class="vb-form__terms">
+          <label class="vb-control"><input type="checkbox" /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span></label>
+          <span class="vb-form__termstext">Ik ga akkoord met de verwerking van mijn gegevens zoals beschreven in de <a href="#" class="vb-link">privacy- en cookieverklaring</a>.</span>
+        </div>
+        <div><button type="submit" class="vb-btn vb-ctam__btn">Bericht verzenden</button></div>
+        <p class="vb-form__note">*verplicht in te vullen</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+    document.querySelectorAll('[data-select]').forEach(function (sel) {
+      var value = sel.querySelector('.vb-select__value');
+      sel.querySelectorAll('.vb-select__opt').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          if (value) value.textContent = opt.textContent;
+          sel.querySelectorAll('.vb-select__opt').forEach(function (o) { o.setAttribute('aria-selected', 'false'); });
+          opt.setAttribute('aria-selected', 'true');
+          sel.removeAttribute('open');
+        });
+      });
+    });
+  })();
+</script>

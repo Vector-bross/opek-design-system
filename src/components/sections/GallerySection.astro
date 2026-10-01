@@ -1,0 +1,106 @@
+---
+/**
+ * ORGANISMS · Gallery (#gallery) — "Gallery". Title (H2) + square image grid
+ * (3 cols, gap 32, max-width 1280). Hover rollover (zoom + expand overlay);
+ * clicking an image opens an accessible <dialog> lightbox (showModal) with
+ * prev/next, Esc & light dismiss, keyboard arrows and touch swipe on mobile.
+ * Figma 18591:18189. Own `.vb-gal*` namespace (avoid old .vb-gallery tile).
+ */
+const expand = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const images = [1, 2, 3, 4, 5];
+const ph = (n) => `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#d9d9d9"/><text x="50" y="56" font-size="22" font-family="monospace" fill="#8a8a8a" text-anchor="middle">${n}</text></svg>`;
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Gallery — desktop / mobile<span class="vb-cap-id">#gallery</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-gal" data-sec>
+    <div class="vb-gal__inner">
+      <h2 class="vb-gal__title">Gallery</h2>
+
+      <div class="vb-gal__grid" data-gallery>
+        {images.map((n, i) => (
+          <button type="button" class="vb-gal__item" data-index={i} aria-label={`Bekijk afbeelding ${n} in het groot`}>
+            <span class="vb-gal__img" set:html={ph(n)}></span>
+            <span class="vb-gal__over"><span class="vb-gal__exp" set:html={expand}></span></span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <dialog class="vb-gal__lb" closedby="any" aria-label="Gallery image viewer" data-lightbox>
+      <button type="button" class="vb-gal__close" data-close aria-label="Sluiten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button type="button" class="vb-gal__nav vb-gal__nav--prev" data-prev aria-label="Vorige">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <figure class="vb-gal__stage" data-stage>
+        <span class="vb-gal__big" data-big></span>
+      </figure>
+      <button type="button" class="vb-gal__nav vb-gal__nav--next" data-next aria-label="Volgende">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <span class="vb-gal__counter" data-counter aria-live="polite"></span>
+    </dialog>
+  </div>
+</div>
+
+<script is:inline define:vars={{ phList: images.map((n) => ph(n)) }}>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (t && sec && !t.dataset.bound) {
+        t.dataset.bound = '1';
+        t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+      }
+    });
+
+    document.querySelectorAll('[data-gallery]').forEach(function (grid) {
+      var root = grid.closest('[data-sec]');
+      var lb = root.querySelector('[data-lightbox]');
+      if (!lb || lb.dataset.bound) return;
+      lb.dataset.bound = '1';
+      // Move out of any container-type ancestor so the modal centers on the viewport.
+      document.body.appendChild(lb);
+      var big = lb.querySelector('[data-big]');
+      var counter = lb.querySelector('[data-counter]');
+      var items = Array.prototype.slice.call(grid.querySelectorAll('.vb-gal__item'));
+      var total = phList.length;
+      var idx = 0;
+
+      function render() { big.innerHTML = phList[idx]; counter.textContent = (idx + 1) + ' / ' + total; }
+      function open(i) { idx = i; render(); if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open', ''); }
+      function go(d) { idx = (idx + d + total) % total; render(); }
+
+      items.forEach(function (it, i) { it.addEventListener('click', function () { open(i); }); });
+      lb.querySelector('[data-prev]').addEventListener('click', function () { go(-1); });
+      lb.querySelector('[data-next]').addEventListener('click', function () { go(1); });
+      lb.querySelector('[data-close]').addEventListener('click', function () { lb.close(); });
+
+      lb.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      });
+
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        lb.addEventListener('click', function (e) {
+          if (e.target !== lb) return;
+          var r = lb.getBoundingClientRect();
+          var inside = r.top <= e.clientY && e.clientY <= r.top + r.height && r.left <= e.clientX && e.clientX <= r.left + r.width;
+          if (!inside) lb.close();
+        });
+      }
+
+      var sx = 0, sy = 0;
+      lb.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+      lb.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    });
+  })();
+</script>

@@ -7,18 +7,20 @@ const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.o
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA-large — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA with media — large — desktop / mobile<span class="vb-cap-id">#cta-with-media-large</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
+  <div class="vb-cta-lg-wrap">
   <div class="vb-cta-lg" data-sec>
     <div class="vb-cta-lg__panel">
-      <div class="vb-cta-lg__body">
-        <h3 class="vb-cta-lg__title">Lorem ipsum dolor sitametconsecte.</h3>
-        <p class="vb-cta-lg__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.</p>
+      <h3 class="vb-cta-lg__title">Iets vragen of langskomen?</h3>
+      <div class="vb-cta-lg__details">
+        <p class="vb-cta-lg__text">Een vraag stellen, een bezoek plannen of de weg naar de Vaartkom vinden? Contactgegevens, route en bereikbaarheid staan op één plek.</p>
+        <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg">Contacteer ons</a>
       </div>
-      <a href="#" class="vb-btn vb-btn--primary">Contact us</a>
     </div>
     <div class="vb-cta-lg__media"><div class="vb-image" set:html={placeholder}></div></div>
+  </div>
   </div>
 </div>
 

@@ -1,18 +1,17 @@
 ---
 /** Portal shell — persistent left sidebar (Relume/Silk-style) + main area. */
 import '../styles/global.css';
-import logo from '../assets/brand/logo-vb.svg?raw';
+import logo from '../assets/opek/logo.svg?raw';
 import { categories } from '../registry';
-import { templates, templateModules, singleTemplates, moduleTemplates } from '../lib/templates';
 interface Props { title?: string; active?: string; base?: string; }
-const { title = 'Kickstart Theme', active = '', base = '' } = Astro.props;
+const { title = 'Opek - Design System', active = '', base = '' } = Astro.props;
 const design = [
   { id: 'atoms', label: 'Atoms', href: `${base}atoms.html` },
   { id: 'molecules', label: 'Molecules', href: `${base}molecules.html` },
-  { id: 'organisms', label: 'Organisms', href: `${base}organisms.html` },
-  { id: 'sections', label: 'Page sections 1', href: `${base}sections.html` },
-  { id: 'sections2', label: 'Page sections 2', href: `${base}sections2.html` },
-  { id: 'textcontent', label: 'Text content', href: `${base}textcontent.html` },
+  { id: 'organisms', label: 'Organisms — Layout', href: `${base}organisms.html` },
+  { id: 'textcontent', label: 'Organisms — CK Editor & texts', href: `${base}textcontent.html` },
+  { id: 'forms', label: 'Organisms — Forms', href: `${base}forms.html` },
+  { id: 'sections', label: 'Organisms — Page sections', href: `${base}sections.html` },
 ];
 ---
 <!doctype html>
@@ -33,24 +32,6 @@ const design = [
           <p class="vb-side__gtitle">Library</p>
           <a href={`${base}index.html`} class={active === 'home' ? 'is-active' : ''}>Sections</a>
           <a href={`${base}styleguide.html`} class={active === 'styleguide' ? 'is-active' : ''}>Styleguide</a>
-        </div>
-
-        <div class="vb-side__group">
-          <p class="vb-side__gtitle">Page templates</p>
-          <div class="vb-side__sub">
-            <p class="vb-side__subtitle">Single pages</p>
-            {singleTemplates().map((t) => (
-              <a href={`${base}t/${t.id}.html`} class={active === `tpl-${t.id}` ? 'is-active' : ''}>{t.name}</a>
-            ))}
-          </div>
-          {templateModules.map((m) => (
-            <div class="vb-side__sub">
-              <p class="vb-side__subtitle">{m.label} module</p>
-              {moduleTemplates(m.id).map((t) => (
-                <a href={`${base}t/${t.id}.html`} class={active === `tpl-${t.id}` ? 'is-active' : ''}>{t.name}</a>
-              ))}
-            </div>
-          ))}
         </div>
 
         <div class="vb-side__group">

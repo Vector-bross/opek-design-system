@@ -16,28 +16,55 @@
   --vb-color-neutral-darker: #222222;
   --vb-color-neutral-darkest: #000000;
 
-  /* ---- Brand · Primary ---- */
-  --vb-brand-primary-200: #d8e4ff;
-  --vb-brand-primary-300: #b3caff;
-  --vb-brand-primary-400: #7fa5ff;
-  --vb-brand-primary-500: #004cff;
-  --vb-brand-primary-600: #15388a;
-  --vb-brand-primary-700: #081d4c;
+  /* ---- Brand green — OPEK "Primary color 1" · exact Light & Dark ramps (Figma) ---- */
+  --vb-green-light-400: #dffaee;
+  --vb-green-light-500: #9fd5bc;
+  --vb-color-highlight: #abded9;   /* OPEK Secondary color 1/200 — RTE text highlight */
+  --vb-green-light-600: #7ac5a2;
+  --vb-green-light-700: #5d997d;
+  --vb-green-dark-300: #e0fcef;
+  --vb-green-dark-400: #a6e0c6;
+  --vb-green-dark-500: #73c6a1;
+  --vb-green-dark-600: #57a482;
+  --vb-green-dark-700: #377a66;
 
-  /* ---- Brand · Secondary ---- */
-  --vb-brand-secondary-200: #e8e4fa;
-  --vb-brand-secondary-300: #bdb4e3;
-  --vb-brand-secondary-400: #9c8be8;
-  --vb-brand-secondary-500: #7055e6;
-  --vb-brand-secondary-600: #1d154e;
-  --vb-brand-secondary-700: #110c2d;
+  /* ---- Brand · Primary (green — the single interactive brand hue) ---- */
+  --vb-brand-primary-100: var(--vb-green-light-400); /* #dffaee */
+  --vb-brand-primary-200: var(--vb-green-dark-300);  /* #e0fcef */
+  --vb-brand-primary-300: var(--vb-green-dark-400);  /* #a6e0c6 */
+  --vb-brand-primary-400: var(--vb-green-light-500); /* #9fd5bc */
+  --vb-brand-primary-500: var(--vb-green-dark-500);  /* #73c6a1 */
+  --vb-brand-primary-600: var(--vb-green-dark-600);  /* #57a482 */
+  --vb-brand-primary-700: var(--vb-green-dark-700);  /* #377a66 */
 
-  /* ---- Brand · Tertiary ---- */
-  --vb-brand-tertiary-200: #ffd7fc;
-  --vb-brand-tertiary-300: #ffbbf9;
-  --vb-brand-tertiary-400: #ff8bf5;
-  --vb-brand-tertiary-500: #fb58ed;
-  --vb-brand-tertiary-600: #cd15be;
+  /* ---- Brand · Secondary / Tertiary — OPEK reuses the SAME green (outline / link buttons) ---- */
+  --vb-brand-secondary-200: var(--vb-green-light-400);
+  --vb-brand-secondary-300: var(--vb-green-light-500);
+  --vb-brand-secondary-400: var(--vb-green-light-500);
+  --vb-brand-secondary-500: var(--vb-green-light-500);
+  --vb-brand-secondary-600: var(--vb-green-light-600);
+  --vb-brand-secondary-700: var(--vb-green-light-700);
+  --vb-brand-tertiary-200: var(--vb-green-dark-400);
+  --vb-brand-tertiary-300: var(--vb-green-dark-400);
+  --vb-brand-tertiary-400: var(--vb-green-dark-500);
+  --vb-brand-tertiary-500: var(--vb-green-dark-500);
+  --vb-brand-tertiary-600: var(--vb-green-dark-600);
+
+  /* ---- Accents — OPEK category colors (terracotta / teal / brown / magenta) ---- */
+  --vb-accent-terracotta-200: #f6ecea;
+  --vb-accent-terracotta-500: #d25e45;
+  --vb-accent-terracotta-600: #a63d26;
+  --vb-accent-teal-200: #abded9;
+  --vb-accent-teal-400: #427671;
+  --vb-accent-teal-500: #204844;
+  --vb-accent-teal-600: #143c38;
+  --vb-accent-teal-700: #0b2e2b;
+  --vb-accent-brown-400: #bc8878;
+  --vb-accent-brown-500: #824837;
+  --vb-accent-brown-600: #542f24;
+  --vb-accent-magenta-500: #ff00c8;
+  --vb-accent-magenta-alt: #f116c2;
+  --vb-accent-magenta-600: #cc00a0;
 
   /* ---- State (Figma primitives: Color/danger · success · focus) ---- */
   --vb-color-success: #04b56c;
@@ -72,10 +99,10 @@
      ====================================================================== */
 
   /* ---- Font families ---- */
-  --vb-font-family-heading: "Poppins", system-ui, sans-serif;
-  --vb-font-family-body: "Inter", system-ui, sans-serif;
-  --vb-font-family-caps: "Poppins", system-ui, sans-serif;
-  --vb-font-family-buttons: "Inter", system-ui, sans-serif;
+  --vb-font-family-heading: "ITC Kabel", system-ui, sans-serif;
+  --vb-font-family-body: "Manrope", system-ui, sans-serif;
+  --vb-font-family-caps: "Pitch", system-ui, sans-serif;
+  --vb-font-family-buttons: "Pitch", system-ui, sans-serif;
 
   /* ---- Font weights (Figma: Font Weight/*) ---- */
   --vb-font-weight-thin: 100;
@@ -90,6 +117,8 @@
   --vb-font-weight-link: 500;
 
   /* ---- Line heights ---- */
+  --vb-line-height-90: 0.9;    /* OPEK menu */
+  --vb-line-height-95: 0.95;   /* OPEK big headings (h1/h2 + Home) */
   --vb-line-height-100: 1;
   --vb-line-height-110: 1.1;
   --vb-line-height-115: 1.15;
@@ -100,20 +129,30 @@
   /* ---- Letter spacing ---- */
   --vb-letter-spacing-tighter: -0.04em;
   --vb-letter-spacing-tight: -0.02em;
+  --vb-letter-spacing-none: 0em;
   --vb-letter-spacing-wide: 0.02em;
+  --vb-letter-spacing-wider: 0.04em;   /* OPEK menu tracking */
 
-  /* ---- Font sizes (Figma: Font Sizes/*) ---- */
-  --vb-font-size-display-1: 72px;
-  --vb-font-size-display-2: 56px;
-  --vb-font-size-h1: 64px;
-  --vb-font-size-h2: 48px;
-  --vb-font-size-h3: 40px;
-  --vb-font-size-h4: 32px;
-  --vb-font-size-h5: 24px;
+  /* ---- Font sizes (Figma: Font Sizes/*) ----
+     Headings are FLUID: they interpolate between the Figma Mobile value (floor,
+     reached ~480px viewport) and the Figma Desktop value (ceiling, reached
+     ~1440px viewport), so the mobile type scale engages progressively/early as
+     the width shrinks instead of a hard jump. Floors/ceilings = the Figma modes. */
+  --vb-font-size-display-1: clamp(56px, calc(39px + 3.54vw), 90px);  /* OPEK Heading 1 Home · 56→90 */
+  --vb-font-size-display-2: clamp(48px, calc(40px + 1.67vw), 64px);  /* OPEK Heading 2 Home · 48→64 */
+  --vb-font-size-h1: clamp(40px, calc(20px + 4.17vw), 80px);         /* 40→80 */
+  --vb-font-size-h2: clamp(36px, calc(26px + 2.08vw), 56px);         /* 36→56 */
+  --vb-font-size-h3: clamp(32px, calc(28px + 0.83vw), 40px);         /* 32→40 */
+  --vb-font-size-h4: clamp(24px, calc(20px + 0.83vw), 32px);         /* 24→32 */
+  --vb-font-size-h5: clamp(20px, calc(18px + 0.42vw), 24px);         /* 20→24 */
   --vb-font-size-h6: 20px;
+  /* Fixed desktop values (unclamped) — for places that must not shrink. */
+  --vb-font-size-h1-fixed: 80px;
+  --vb-font-size-h2-fixed: 56px;
   --vb-font-size-lg: 20px;
   --vb-font-size-md: 18px;
   --vb-font-size-intro-big: 32px;  /* Figma: Intro/Big */
+  --vb-font-size-intro-small: 24px;  /* Figma: Intro/Small */
   --vb-font-size-base: 16px;
   --vb-font-size-sm: 14px;
   --vb-font-size-xs: 12px;
@@ -135,7 +174,7 @@
 
   /* ---- Semantic type roles ---- */
   --vb-heading-font-family: var(--vb-font-family-heading);
-  --vb-heading-font-weight: var(--vb-font-weight-semibold);
+  --vb-heading-font-weight: var(--vb-font-weight-normal); /* OPEK: ITC Kabel Book = 400 */
   --vb-heading-line-height: var(--vb-line-height-110);
 
   --vb-text-font-family: var(--vb-font-family-body);
@@ -149,10 +188,13 @@
   --vb-button-line-height: var(--vb-line-height-115);
   --vb-button-letter-spacing: var(--vb-letter-spacing-tight);
 
-  --vb-menu-font-family: var(--vb-font-family-heading);
-  --vb-menu-font-size: 12px;
-  --vb-menu-line-height: var(--vb-line-height-150);
-  --vb-menu-letter-spacing: var(--vb-letter-spacing-wide);
+  --vb-menu-font-family: var(--vb-font-family-heading); /* OPEK: ITC Kabel */
+  --vb-menu-item-gap: 32px;   /* mobile menu row gap — stable (not collapsed on mobile) */
+  --vb-menu-block-gap: 40px;  /* mobile menu section gap (contact) — stable */
+  --vb-menu-font-size: 14px;                            /* OPEK Label Menu = 14 */
+  --vb-menu-font-weight: var(--vb-font-weight-medium);  /* OPEK Label Menu = 500 */
+  --vb-menu-line-height: var(--vb-line-height-90);      /* OPEK = 0.9 */
+  --vb-menu-letter-spacing: var(--vb-letter-spacing-wider); /* OPEK = 0.04em */
 
   /* ======================================================================
      SPACING & SIZING (Figma: Spacing/*)
@@ -160,6 +202,7 @@
   --vb-spacer-0: 0px;
   --vb-spacer-1: 4px;
   --vb-spacer-2: 8px;
+  --vb-spacer-mobile: 20px;   /* OPEK mobile padding-comp (xxsmall/xsmall/medium/large collapse to 20 on mobile) */
   --vb-spacer-3: 12px;
   --vb-spacer-4: 16px;
   --vb-spacer-5: 24px;
@@ -177,10 +220,10 @@
      ====================================================================== */
   --vb-radius-none: 0px;
   --vb-radius-xtiny: 2px;
-  --vb-radius-tiny: 4px;
-  --vb-radius-xxxsmall: 6px;
+  --vb-radius-tiny: 2px;      /* OPEK radius-tiny = 2 */
+  --vb-radius-xxxsmall: 4px;  /* OPEK radius-xxxsmall = 4 */
   --vb-radius-xxsmall: 8px;
-  --vb-radius-social: 6px;
+  --vb-radius-social: 8px;    /* OPEK: social tiles use 8 */
   --vb-radius-xsmall: 12px;
   --vb-radius-small: 16px;
   --vb-radius-medium: 24px;
@@ -188,6 +231,7 @@
   --vb-radius-xlarge: 48px;
   --vb-radius-xxlarge: 64px;
   --vb-border-width: 1px;
+  --vb-border-width-thick: 2px;
 
   /* ======================================================================
      OPACITY primitives (Figma: Opacity/*) — subset in use so far
@@ -201,7 +245,7 @@
   /* ======================================================================
      COMPONENT — Button (semantic, from Atoms/Button)
      ====================================================================== */
-  --vb-button-radius: var(--vb-radius-small);
+  --vb-button-radius: var(--vb-radius-none); /* OPEK: square buttons */
   --vb-button-gap: var(--vb-spacer-2);
   --vb-button-pad-y: 16px;
   --vb-button-pad-x: 24px;
@@ -226,11 +270,11 @@
   /* ======================================================================
      COMPONENT — Tooltip (Atoms/Tooltip)
      ====================================================================== */
-  --vb-tooltip-radius: var(--vb-radius-xxsmall);
+  --vb-tooltip-radius: var(--vb-radius-tiny); /* OPEK: angular, 2px */
   --vb-tooltip-pad-y: 12px;
   --vb-tooltip-pad-x: 12px;
   --vb-tooltip-font-size: var(--vb-font-size-xs);
-  --vb-tooltip-bg-dark: var(--vb-brand-primary-500);
+  --vb-tooltip-bg-dark: var(--vb-green-dark-700); /* OPEK tooltip (no Figma spec): brand green, visible on light + dark */
   --vb-tooltip-fg-dark: var(--vb-color-white);
   --vb-tooltip-bg-light: var(--vb-color-white);
   --vb-tooltip-fg-light: var(--vb-color-scheme-1-body-color);

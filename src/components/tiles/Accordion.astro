@@ -4,6 +4,8 @@
  * Question (Poppins SemiBold 20 #000) + faq toggle; answer (Inter Light 16 #444).
  * Interactive: native checkbox opens/closes each item and swaps + / −.
  */
+import icPlus from '../../assets/opek/icons/plus.svg?raw';
+import icMinus from '../../assets/opek/icons/minus.svg?raw';
 const q = 'Imperdietunc ut sem vitae risus tristique posuer?';
 const a = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.';
 const items = [
@@ -13,7 +15,7 @@ const items = [
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Accordion — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Accordion — desktop / mobile<span class="vb-cap-id">#accordion</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
   <div class="vb-accordion">
@@ -22,7 +24,7 @@ const items = [
         <input type="checkbox" class="vb-accordion__toggle" id={it.id} checked={it.open} />
         <label class="vb-accordion__q" for={it.id}>
           <span class="vb-accordion__title">{q}</span>
-          <span class="vb-faq" aria-hidden="true"></span>
+          <span class="vb-faq" aria-hidden="true"><span class="vb-faq__plus" set:html={icPlus}></span><span class="vb-faq__minus" set:html={icMinus}></span></span>
         </label>
         <div class="vb-accordion__a"><p class="vb-accordion__text">{a}</p></div>
       </div>

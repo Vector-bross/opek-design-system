@@ -3,10 +3,19 @@
  * MOLECULES — Controls. Reuses atoms/tokens only. Interactive demo.
  * Presentation matches Figma: thin separators; only Tags shows a dark panel.
  */
-import arrow from '../assets/icons/arrow-right.svg?raw';
-import chevron from '../assets/icons/down-arrow.svg?raw';
+import arrow from '../assets/opek/icons/arrow-right.svg?raw';
+import icInfo from '../assets/opek/icons/info-circle-2.svg?raw';
+import icTick from '../assets/opek/icons/tick.svg?raw';
+import icClose from '../assets/opek/icons/close-circle.svg?raw';
+import icPlus from '../assets/opek/icons/plus.svg?raw';
+import icMinus from '../assets/opek/icons/minus.svg?raw';
 
 const filters = ['View all', 'Category one', 'Category two', 'Category three', 'Category four'];
+const alerts = [
+  { cls: 'vb-alert--info', icon: icInfo },
+  { cls: 'vb-alert--success', icon: icTick },
+  { cls: 'vb-alert--danger', icon: icClose },
+];
 const tabs = ['Tabulation 1', 'Tabulation 2', 'Tabulation 3', 'Tabulation 4', 'Tabulation 5', 'Tabulation 6', 'Tabulation 7'];
 const segments = ['Button', 'Button', 'Button', 'Button', 'Button', 'Button'];
 const pages = ['1', '2', '3', '4'];
@@ -29,7 +38,7 @@ const pages = ['1', '2', '3', '4'];
         <span class="vb-tag vb-tag--alt">Category</span>
         <span class="vb-tag vb-tag--alt"><span class="vb-tag__dot"></span>Category</span>
         <a href="#" class="vb-tag vb-tag--link">Category</a>
-        <a href="#" class="vb-tag vb-tag--link"><span class="vb-tag__dot"></span>Category</a>
+        <span class="vb-tag vb-tag--magenta">Category</span>
       </div>
     </div>
   </section>
@@ -54,8 +63,8 @@ const pages = ['1', '2', '3', '4'];
   <section class="flex flex-col gap-4 py-8">
     <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Faqs</h3>
     <div class="flex gap-4">
-      <label class="vb-faq" aria-label="Toggle"><input type="checkbox" /></label>
-      <label class="vb-faq vb-faq--dark" aria-label="Toggle"><input type="checkbox" /></label>
+      <label class="vb-faq" aria-label="Toggle"><input type="checkbox" /><span class="vb-faq__plus" set:html={icPlus}></span><span class="vb-faq__minus" set:html={icMinus}></span></label>
+      <label class="vb-faq vb-faq--dark" aria-label="Toggle"><input type="checkbox" /><span class="vb-faq__plus" set:html={icPlus}></span><span class="vb-faq__minus" set:html={icMinus}></span></label>
     </div>
   </section>
 
@@ -110,11 +119,11 @@ const pages = ['1', '2', '3', '4'];
   </section>
 
   <!-- Pager -->
-  <section class="flex flex-col gap-4 py-8 last:pb-0">
+  <section class="flex flex-col gap-4 py-8">
     <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Pager</h3>
     <div data-nav="pg" class="vb-pager">
       <button type="button" class="vb-pager__btn vb-pager__btn--prev" data-dir="prev">
-        <span class="vb-pager__chev" set:html={chevron}></span><span>Prev</span>
+        <span class="vb-pager__chev" set:html={arrow}></span><span>Prev.</span>
       </button>
       <div class="vb-pager__nums">
         {pages.map((p, i) => (
@@ -128,8 +137,24 @@ const pages = ['1', '2', '3', '4'];
         <label class="vb-page" for="pg-8">8</label>
       </div>
       <button type="button" class="vb-pager__btn vb-pager__btn--next" data-dir="next">
-        <span>Next</span><span class="vb-pager__chev" set:html={chevron}></span>
+        <span>Next</span><span class="vb-pager__chev" set:html={arrow}></span>
       </button>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  <section class="flex flex-col gap-4 py-8 last:pb-0">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Alerts</h3>
+    <div class="flex flex-col gap-4">
+      {alerts.map((a) => (
+        <div class={`vb-alert ${a.cls}`}>
+          <span class="vb-alert__icon" set:html={a.icon} />
+          <div class="vb-alert__body">
+            <span class="vb-alert__title">Hello World</span>
+            <span class="vb-alert__desc">Some description of the alert</span>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 

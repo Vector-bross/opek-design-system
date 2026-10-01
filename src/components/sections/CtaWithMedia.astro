@@ -1,0 +1,69 @@
+---
+/**
+ * MOLECULE · CTA with media (#cta-with-media) — full-bleed coloured band, image
+ * left + content right (title, text, buttons). Colour variants: location (brown),
+ * highlights (magenta), info (UiTPAS). Figma 18652:19618. Atoms/tokens only.
+ * Same `.vb-ctam` component shown in Molecules (Cards & CTA).
+ */
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA with media — desktop / mobile<span class="vb-cap-id">#cta-with-media</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-ctam-wrap" data-sec>
+    <!-- Variant: location (brown) -->
+    <div class="vb-ctam vb-ctam--brown">
+      <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+      <div class="vb-ctam__content">
+        <h3 class="vb-ctam__title">Locatie<br />in OPEK</h3>
+        <div class="vb-ctam__details">
+          <p class="vb-ctam__text">Dit event vindt plaats in Daklokaal + Terras (polyvalent). Bekijk de zaalpagina voor faciliteiten, capaciteit en opstellingen, of plan je route naar OPEK.</p>
+          <div class="vb-ctam__actions">
+            <a href="#" class="vb-btn vb-btn--small vb-ctam__btn">Meer over Daklokaal + Terras</a>
+            <a href="#" class="vb-btn vb-btn--small vb-ctam__btn vb-ctam__btn--ghost">Route &amp; parkeren</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variant: highlights (magenta) -->
+    <div class="vb-ctam vb-ctam--magenta">
+      <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+      <div class="vb-ctam__content">
+        <h3 class="vb-ctam__title">OPEK<br />Ontploft</h3>
+        <div class="vb-ctam__details">
+          <p class="vb-ctam__text">Met OPEK Ontploft knallen we het seizoen open: een dag vol performances, open mic, workshops, beeldende kunst en een legendarisch feestje.</p>
+          <div class="vb-ctam__actions">
+            <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg">Ontdek OPEK Ontploft</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variant: info (UiTPAS) — image left, black title + grey text, no buttons -->
+    <div class="vb-ctam vb-ctam--info">
+      <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+      <div class="vb-ctam__content">
+        <h3 class="vb-ctam__title">UiTPAS &amp; Paspartoe</h3>
+        <div class="vb-ctam__details">
+          <p class="vb-ctam__text">OPEK is partner van UiTPAS en Paspartoe. Met je UiTPAS spaar je punten bij elk bezoek en wissel je ze in voor voordelen. Wie recht heeft op het kansentarief betaalt een verlaagd tarief — vraag ernaar bij de organisator of aan de balie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

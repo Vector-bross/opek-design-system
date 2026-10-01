@@ -15,8 +15,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.0.0",
-    "@fontsource/poppins": "^5.0.0",
+    "@fontsource/manrope": "^5.0.0",
     "astro": "^5.6.0"
   },
   "devDependencies": {

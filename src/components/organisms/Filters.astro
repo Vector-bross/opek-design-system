@@ -1,0 +1,86 @@
+---
+/**
+ * ORGANISMS — Filters. OPEK Figma 18591:17771 (desktop). Reuses radio/checkbox atoms.
+ * Teal (#204844) grouped panels, green-light bold titles, white Manrope labels.
+ * Mobile (designed, no Figma node): a "Filters" trigger button opens a full-screen
+ * green sheet with the same groups + a close button and an apply action.
+ */
+import tick from '../../assets/opek/icons/tick.svg?raw';
+const filterIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+const xIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+const groups = [
+  {
+    title: 'Wanneer', type: 'radio', name: 'wanneer',
+    options: [
+      { label: 'Alle datums', checked: true },
+      { label: 'Vandaag' }, { label: 'Dit weekend' }, { label: 'Deze week' }, { label: 'Deze maand' },
+    ],
+  },
+  {
+    title: 'Categorie', type: 'checkbox',
+    options: [
+      { label: 'Voorstellingen' }, { label: 'Concerten', checked: true }, { label: "Expo's" },
+      { label: 'Festiviteiten', checked: true }, { label: 'Workshops' }, { label: 'Kampen' },
+    ],
+  },
+  {
+    title: 'Bewoner', type: 'checkbox',
+    options: ['TRILL', 'fABULEUS', 'De FactorY', 'LUCA Drama', 'Het nieuwstedelijk', 'Bamm!', 'WISPER', 'Kunst in Huis', 'DeGarage'].map((label) => ({ label })),
+  },
+];
+---
+<div class="flex flex-col gap-4" data-tile data-filtile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Filters — desktop / mobile<span class="vb-cap-id">#filters</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-filters-wrap">
+    <button type="button" class="vb-filters__trigger" data-filters-open>
+      <span class="vb-filters__triggericon" set:html={filterIcon}></span>Filters
+    </button>
+
+    <div class="vb-filters__sheet" data-filters-sheet>
+      <div class="vb-filters__sheethead">
+        <span class="vb-filters__sheettitle">Filters</span>
+        <button type="button" class="vb-filters__close" data-filters-close aria-label="Sluiten" set:html={xIcon}></button>
+      </div>
+
+      <div class="vb-filters">
+        {groups.map((g) => (
+          <div class="vb-filters__group">
+            <p class="vb-filters__title">{g.title}</p>
+            <div class="vb-filters__options">
+              {g.options.map((o) => (
+                <label class="vb-control vb-filters__opt">
+                  <input type={g.type} name={g.type === 'radio' ? g.name : undefined} checked={o.checked} />
+                  {g.type === 'radio'
+                    ? <span class="vb-radio__dot"></span>
+                    : <span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>}
+                  {o.label}
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg vb-filters__apply">Toon resultaten</a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-filtile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var wrap = tile.querySelector('.vb-filters-wrap');
+      var sheet = tile.querySelector('[data-filters-sheet]');
+      if (t && wrap) t.addEventListener('change', function () { wrap.classList.toggle('is-mobile', t.checked); if (!t.checked && sheet) sheet.classList.remove('is-open'); });
+      var open = tile.querySelector('[data-filters-open]');
+      var close = tile.querySelector('[data-filters-close]');
+      if (open && sheet) open.addEventListener('click', function () { sheet.classList.add('is-open'); });
+      if (close && sheet) close.addEventListener('click', function () { sheet.classList.remove('is-open'); });
+    });
+  })();
+</script>

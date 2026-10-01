@@ -3,7 +3,7 @@
 import '../styles/global.css';
 import logo from '../assets/brand/logo-vb.svg?raw';
 interface Props { title?: string; active?: 'home' | 'library' | 'foundations'; base?: string; }
-const { title = 'Kickstart Theme', active, base = '' } = Astro.props;
+const { title = 'Opek - Design System', active, base = '' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -16,7 +16,7 @@ const { title = 'Kickstart Theme', active, base = '' } = Astro.props;
     <header class="vb-portalbar">
       <a href={`${base}index.html`} class="vb-portalbar__brand">
         <span class="vb-portalbar__logo" set:html={logo}></span>
-        <span class="vb-portalbar__name">Kickstart Theme</span>
+        <span class="vb-portalbar__name">Opek - Design System</span>
       </a>
       <nav class="vb-portalbar__nav">
         <a href={`${base}library.html`} class={active === 'library' ? 'is-active' : ''}>Library</a>

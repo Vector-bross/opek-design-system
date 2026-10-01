@@ -1,0 +1,46 @@
+---
+/**
+ * ORGANISMS · text-nb list (#nb-list-section) — "Hoe werkt een aanvraag?".
+ * Faithful to Figma 18608:20078. 50/50: title left, right = bold lead +
+ * numbered list (.vb-numlist molecule) + closing paragraph. Atoms/molecules only.
+ */
+import n1 from '../../assets/icons/numbered/01.svg?raw';
+import n2 from '../../assets/icons/numbered/02.svg?raw';
+import n3 from '../../assets/icons/numbered/03.svg?raw';
+const steps = [
+  { badge: n1, text: 'Je dient je aanvraag in via het formulier hieronder.' },
+  { badge: n2, text: 'Wij checken de beschikbaarheid voor je voorkeursdata.' },
+  { badge: n3, text: 'Je krijgt een persoonlijk antwoord met offerte of bevestiging.' },
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Section · numbered list — desktop / mobile<span class="vb-cap-id">#nb-list-section</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-splitsec" data-sec>
+    <h2 class="vb-splitsec__title">Hoe werkt een aanvraag?</h2>
+    <div class="vb-splitsec__body">
+      <p class="vb-splitsec__lead">Geen automatische boeking: je dient een aanvraag in, wij checken de beschikbaarheid en je krijgt een persoonlijk antwoord.</p>
+      <ul class="vb-numlist">
+        {steps.map((s) => (
+          <li class="vb-numlist__item"><span class="vb-numlist__badge" set:html={s.badge}></span><span class="vb-numlist__text">{s.text}</span></li>
+        ))}
+      </ul>
+      <p class="vb-splitsec__text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt …</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

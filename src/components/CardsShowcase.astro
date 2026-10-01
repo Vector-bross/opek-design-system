@@ -5,149 +5,193 @@
  */
 const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 import serviceIcon from '../assets/icons/service-cube.svg?raw';
+import icCalendar from '../assets/opek/icons/calendar.svg?raw';
+import icHouse from '../assets/opek/icons/house-2.svg?raw';
+import icLocation from '../assets/opek/icons/location-sharp.svg?raw';
+import icCourthouse from '../assets/opek/icons/courthouse.svg?raw';
+import fs from 'node:fs';
+import path from 'node:path';
+const bewonerLogo = (() => { try { return 'data:image/png;base64,' + fs.readFileSync(path.join(process.cwd(), 'src/assets/opek/brand/logo-1.png')).toString('base64'); } catch (e) { return ''; } })();
 const featureText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.';
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Cards &amp; CTA — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Cards — vertical (news / zaal / over / bewoners)<span class="vb-cap-id">#cards-vertical</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
 
-  <div class="vb-cards">
-    <!-- TeamMember -->
-    <article class="vb-card">
-      <div class="vb-image" set:html={placeholder}></div>
-      <div class="vb-card__body">
-        <h3 class="vb-card__title">Firstname Lastname</h3>
-        <p class="vb-card__sub">Function, company name</p>
-      </div>
-      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
-    </article>
-
-    <!-- News -->
-    <article class="vb-card">
-      <div class="vb-image" set:html={placeholder}></div>
-      <div class="vb-card__meta">
-        <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
-        <span class="vb-card__date">01/01/2026</span>
-      </div>
-      <div class="vb-card__body">
-        <h3 class="vb-card__title">Blog title heading will go here lorem ipsum</h3>
-        <p class="vb-card__sub vb-card__sub--light">Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
-      </div>
-      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
-    </article>
-
-    <!-- Simple / Service -->
-    <article class="vb-card">
-      <div class="vb-image" set:html={placeholder}></div>
-      <div class="vb-card__body">
-        <h3 class="vb-card__title vb-card__title--lg">Service name</h3>
-        <p class="vb-card__sub vb-card__sub--light">Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
-      </div>
-      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
-    </article>
-
-    <!-- Location -->
-    <article class="vb-card">
-      <div class="vb-image" set:html={placeholder}></div>
-      <div class="vb-card__body">
-        <h3 class="vb-card__title">Location name</h3>
-        <p class="vb-card__sub vb-card__sub--light">Streetname 01<br />1000 City name</p>
-        <p class="vb-card__sub vb-card__sub--light vb-card__sub--muted">+32 12 34 56 78<br /><a href="mailto:name@email.com" class="vb-link">name@email.com</a></p>
-      </div>
-      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--secondary vb-btn--small">View more</a></div>
-    </article>
-  </div>
-</div>
-
-<!-- ServiceTile (icon + title + text) -->
-<div class="flex flex-col gap-4" data-tile>
-  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">ServiceTile — desktop / mobile</span>
-    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-  </div>
-  <div class="vb-cards">
-    {[1, 2, 3].map(() => (
-      <div class="vb-feature">
-        <span class="vb-feature__icon" set:html={serviceIcon}></span>
-        <div class="vb-feature__body">
-          <h3 class="vb-feature__title">Title lorem ipsum</h3>
-          <p class="vb-feature__text">{featureText}</p>
+  <div class="vb-ocards">
+    <!-- cards-news -->
+    <article class="vb-ocard">
+      <div class="vb-ocard__img vb-image" set:html={placeholder}></div>
+      <div class="vb-ocard__content">
+        <div class="vb-ocard__text">
+          <span class="vb-ocard__date">wo 24 jun 2026</span>
+          <h3 class="vb-ocard__title">Elit esse cillepteur sint occaecat cupidata lorem</h3>
+          <p class="vb-ocard__desc">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt ...</p>
         </div>
       </div>
-    ))}
+    </article>
+
+    <!-- cards-zaal -->
+    <article class="vb-ocard vb-ocard--thick">
+      <div class="vb-ocard__img vb-image" set:html={placeholder}></div>
+      <div class="vb-ocard__content">
+        <div class="vb-ocard__text">
+          <span class="vb-tag vb-tag--soft">Voorstellingen</span>
+          <h3 class="vb-ocard__title">Grote zaal</h3>
+          <p class="vb-ocard__desc">240 m² · 196 personen<br />Verdieping: gelijkvloers</p>
+        </div>
+        <a href="#" class="vb-btn vb-btn--secondary vb-btn--small">Bekijk deze ruimte</a>
+      </div>
+    </article>
+
+    <!-- cards-over -->
+    <article class="vb-ocard vb-ocard--thick">
+      <div class="vb-ocard__img vb-image" set:html={placeholder}></div>
+      <div class="vb-ocard__content">
+        <div class="vb-ocard__text">
+          <h3 class="vb-ocard__title">Wat we doen</h3>
+          <p class="vb-ocard__desc">Wat doet OPEK? Onze missie, werking en het beschermde gebouw aan de Vaartkom.</p>
+        </div>
+        <a href="#" class="vb-btn vb-btn--secondary vb-btn--small">Lees meer</a>
+      </div>
+    </article>
+
+    <!-- cards-bewoners -->
+    <article class="vb-ocard vb-ocard--thick">
+      <div class="vb-ocard__logos">{bewonerLogo && <img src={bewonerLogo} alt="" class="vb-ocard__logoimg" />}</div>
+      <div class="vb-ocard__content">
+        <div class="vb-ocard__text">
+          <h3 class="vb-ocard__title">Trill</h3>
+          <p class="vb-ocard__desc">Fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere.</p>
+        </div>
+        <a href="#" class="vb-btn vb-btn--secondary vb-btn--small">Lees meer</a>
+      </div>
+    </article>
+
+    <!-- Timeline date -->
+    <article class="vb-ocard vb-ocard--thick vb-ocard--timeline">
+      <div class="vb-ocard__content">
+        <span class="vb-ocard__year">2026</span>
+        <div class="vb-ocard__text">
+          <h3 class="vb-ocard__title vb-ocard__title--h4">Douane-entrepot aan de Vaartkom</h3>
+          <p class="vb-ocard__desc vb-ocard__desc--md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <a href="#" class="vb-btn vb-btn--tertiary">Lees het bijhorende nieuwsbericht</a>
+        </div>
+      </div>
+      <div class="vb-ocard__img vb-image"></div>
+    </article>
   </div>
 </div>
 
 <!-- Card horizontal -->
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Card horizontal — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Card horizontal — desktop / mobile<span class="vb-cap-id">#card-horizontal</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
-  <article class="vb-card-h">
-    <div class="vb-card-h__media"><div class="vb-image" set:html={placeholder}></div></div>
-    <div class="vb-card-h__content">
-      <div class="vb-card-h__body">
-        <h3 class="vb-card-h__title">Service name</h3>
-        <p class="vb-card-h__desc">Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel cla ...</p>
+  <div class="vb-hcards">
+    <!-- vacatures -->
+    <article class="vb-hcard vb-hcard--vac">
+      <div class="vb-hcard__head">
+        <h3 class="vb-hcard__title vb-hcard__title--h4">Open call — open mic</h3>
+        <div class="vb-hcard__tagsrow">
+          <span class="vb-tag vb-tag--soft">Open calls</span>
+          <span class="vb-hcard__accent">Reageren tot: vr 10 jul 2026</span>
+        </div>
       </div>
-      <a href="#" class="vb-btn vb-btn--tertiary">Read more</a>
-    </div>
-  </article>
+      <div class="vb-hcard__bodycol">
+        <div class="vb-hcard__text">
+          <p class="vb-hcard__lead">Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
+          <p class="vb-hcard__desc">Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor ...</p>
+        </div>
+        <a href="#" class="vb-btn vb-btn--secondary vb-btn--small">Bekijk de vacature</a>
+      </div>
+    </article>
+
+    <!-- Event Card -->
+    <article class="vb-hcard vb-hcard--event">
+      <div class="vb-hcard__media vb-image" set:html={placeholder}></div>
+      <div class="vb-hcard__content">
+        <span class="vb-tag vb-tag--soft">Voorstellingen</span>
+        <div class="vb-hcard__evtags">
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icCalendar}></span>wo 24 jun 2026</span>
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icHouse}></span>fAbulous</span>
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icLocation}></span>Grote Zaal</span>
+        </div>
+        <h3 class="vb-hcard__title">Theatervoorstelling</h3>
+      </div>
+    </article>
+
+    <!-- Event Card full -->
+    <article class="vb-hcard vb-hcard--eventfull">
+      <div class="vb-hcard__media vb-hcard__media--sq vb-image" set:html={placeholder}></div>
+      <div class="vb-hcard__content">
+        <div class="vb-hcard__feat">
+          <span class="vb-tag vb-tag--magenta">Uitgelicht</span>
+          <span class="vb-tag vb-tag--soft">Voorstellingen</span>
+        </div>
+        <div class="vb-hcard__evtags">
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icCalendar}></span>wo 24 jun 2026 <span class="vb-hcard__accent">(Meerdere datums)</span></span>
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icCourthouse}></span>DeGarage</span>
+          <span class="vb-hcard__meta"><span class="vb-hcard__ic" set:html={icLocation}></span>Grote Zaal</span>
+        </div>
+        <div class="vb-hcard__titlewrap">
+          <h3 class="vb-hcard__title">Theatervoorstelling</h3>
+          <p class="vb-hcard__price">Vrije toegang</p>
+        </div>
+      </div>
+    </article>
+  </div>
 </div>
 
-<!-- JobOpening -->
+<!-- CTA with media -->
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Job opening — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA with media — desktop / mobile<span class="vb-cap-id">#cta-with-media</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
-  <article class="vb-job">
-    <div class="vb-job__left">
-      <h3 class="vb-job__title">Job title description here</h3>
-      <div class="vb-job__meta">
-        <span><span class="vb-job__meta-label">Type:</span> <span class="vb-job__meta-val">Fulltime</span></span>
-        <span><span class="vb-job__meta-label">Location:</span> <span class="vb-job__meta-val">Leuven</span></span>
+
+  <div class="vb-ctam-wrap" data-ctamwrap>
+  <!-- Variant: location (brown) -->
+  <div class="vb-ctam vb-ctam--brown">
+    <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+    <div class="vb-ctam__content">
+      <h3 class="vb-ctam__title">Locatie<br />in OPEK</h3>
+      <div class="vb-ctam__details">
+        <p class="vb-ctam__text">Dit event vindt plaats in Daklokaal + Terras (polyvalent). Bekijk de zaalpagina voor faciliteiten, capaciteit en opstellingen, of plan je route naar OPEK.</p>
+        <div class="vb-ctam__actions">
+          <a href="#" class="vb-btn vb-btn--small vb-ctam__btn">Meer over Daklokaal + Terras</a>
+          <a href="#" class="vb-btn vb-btn--small vb-ctam__btn vb-ctam__btn--ghost">Route &amp; parkeren</a>
+        </div>
       </div>
     </div>
-    <div class="vb-job__right">
-      <p class="vb-job__desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.</p>
-      <a href="#" class="vb-btn vb-btn--tertiary">Read more</a>
-    </div>
-  </article>
-</div>
+  </div>
 
-<!-- CTA banner -->
-<div class="flex flex-col gap-4" data-tile>
-  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA banner — desktop / mobile</span>
-    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-  </div>
-  <div class="vb-cta">
-    <h3 class="vb-cta__title">Questions or comments?</h3>
-    <p class="vb-cta__text">Elit nisi in eleifend sed nisiulvinar at orci, proin imperdiet commodo consectetur convallis risus. Sed condimentum enim <a href="#" class="vb-link">dignissim adipiscing</a></p>
-    <div class="vb-cta__actions"><a href="#" class="vb-btn vb-btn--primary vb-btn--small">View more</a></div>
-  </div>
-</div>
-
-<!-- CTA-small (text + image) -->
-<div class="flex flex-col gap-4" data-tile>
-  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA with media — desktop / mobile</span>
-    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
-  </div>
-  <div class="vb-cta-media-band">
-  <div class="vb-cta-media">
-    <div class="vb-cta-media__panel">
-      <div class="vb-cta-media__body">
-        <h3 class="vb-cta-media__title">Medium length heading here</h3>
-        <p class="vb-cta-media__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+  <!-- Variant: highlights (magenta) -->
+  <div class="vb-ctam vb-ctam--magenta">
+    <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+    <div class="vb-ctam__content">
+      <h3 class="vb-ctam__title">OPEK<br />Ontploft</h3>
+      <div class="vb-ctam__details">
+        <p class="vb-ctam__text">Met OPEK Ontploft knallen we het seizoen open: een dag vol performances, open mic, workshops, beeldende kunst en een legendarisch feestje.</p>
+        <div class="vb-ctam__actions">
+          <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg">Ontdek OPEK Ontploft</a>
+        </div>
       </div>
-      <a href="#" class="vb-btn vb-btn--primary">Button primary</a>
     </div>
-    <div class="vb-cta-media__media"><div class="vb-image" set:html={placeholder}></div></div>
+  </div>
+
+  <!-- Variant: info (UiTPAS) — image left, black title + grey text, no buttons -->
+  <div class="vb-ctam vb-ctam--info">
+    <div class="vb-ctam__img"><div class="vb-image" set:html={placeholder}></div></div>
+    <div class="vb-ctam__content">
+      <h3 class="vb-ctam__title">UiTPAS &amp; Paspartoe</h3>
+      <div class="vb-ctam__details">
+        <p class="vb-ctam__text">OPEK is partner van UiTPAS en Paspartoe. Met je UiTPAS spaar je punten bij elk bezoek en wissel je ze in voor voordelen. Wie recht heeft op het kansentarief betaalt een verlaagd tarief — vraag ernaar bij de organisator of aan de balie.</p>
+      </div>
+    </div>
   </div>
   </div>
 </div>
@@ -155,18 +199,20 @@ const featureText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Su
 <!-- CTA-large (full-width) -->
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA large (full-width) — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA large (full-width) — desktop / mobile<span class="vb-cap-id">#cta-large-full-width</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
+  <div class="vb-cta-lg-wrap">
   <div class="vb-cta-lg">
     <div class="vb-cta-lg__panel">
-      <div class="vb-cta-lg__body">
-        <h3 class="vb-cta-lg__title">Lorem ipsum dolor sitametconsecte.</h3>
-        <p class="vb-cta-lg__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.</p>
+      <h3 class="vb-cta-lg__title">Iets vragen of langskomen?</h3>
+      <div class="vb-cta-lg__details">
+        <p class="vb-cta-lg__text">Een vraag stellen, een bezoek plannen of de weg naar de Vaartkom vinden? Contactgegevens, route en bereikbaarheid staan op één plek.</p>
+        <a href="#" class="vb-btn vb-ctam__btn vb-ctam__btn--lg">Contacteer ons</a>
       </div>
-      <a href="#" class="vb-btn vb-btn--primary">Contact us</a>
     </div>
     <div class="vb-cta-lg__media"><div class="vb-image" set:html={placeholder}></div></div>
+  </div>
   </div>
 </div>
 
@@ -177,7 +223,7 @@ const featureText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Su
       if (!t || t.dataset.bound) return;
       t.dataset.bound = '1';
       t.addEventListener('change', function () {
-        tile.querySelectorAll('.vb-cards, .vb-card-h, .vb-job, .vb-cta, .vb-cta-media, .vb-cta-lg').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+        tile.querySelectorAll('.vb-cards, .vb-ocards, .vb-card-h, .vb-job, .vb-cta, .vb-ctam-wrap, .vb-cta-lg').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
       });
     });
   })();

@@ -1,74 +1,76 @@
 ---
 /**
- * ORGANISMS — Footer. Atoms + molecules + tokens only.
- * Brand column (logo, contact, socials) + 3 menu columns + credits row
- * (copyright, legal links [mobile], signature). Mobile: stacked.
+ * ORGANISMS — Footer. OPEK Figma 18261:12274 (desktop), 18304:15922 (mobile).
+ * Green bar, max-width 1280. Big OPEK logo + tagline stamp, contact (address,
+ * phone, email, socials, Contact & route), 3 menu columns + copyright column.
+ * Mobile: everything stacked; column titles switch to Manrope ExtraBold. Tokens only.
  */
-import logo from '../../assets/brand/logo-vb.svg?raw';
-import signature from '../../assets/brand/signature.svg?raw';
-const socialRaw = import.meta.glob('../../assets/icons/social/*.svg', { query: '?raw', import: 'default', eager: true });
-const order = ['linkedin', 'instagram', 'facebook', 'tiktok', 'youtube'];
-const socials = order
-  .map((name) => {
-    const key = Object.keys(socialRaw).find((k) => k.includes(`/${name}.svg`));
-    return key ? { name, svg: socialRaw[key] as string } : null;
-  })
-  .filter(Boolean) as { name: string; svg: string }[];
-const columns = ['Column menu', 'Column menu', 'Column menu'];
-const links = ['Link One', 'Link Two', 'Link Three', 'Link Four', 'Link Five'];
+import logo from '../../assets/opek/brand/opek-full-logo.svg?raw';
+import iconVb from '../../assets/opek/icons/icon-vb.svg?raw';
+import iconInsta from '../../assets/opek/icons/social/Instagram.svg?raw';
+import iconLinkedin from '../../assets/opek/icons/social/linkedin-mono.svg?raw';
+const menuCols = [
+  { title: 'Agenda', links: ['Voorstellingen', 'Concerten', "Expo's", 'Festiviteiten', 'Workshops'] },
+  { title: 'Over OPEK', links: ['Wat we doen', 'De Bewoners', 'Nieuws', 'OPEK Tijdslijn', 'Partners & sponsors'] },
+  { title: 'Meer', links: ['Zaalverhuur', 'Café Entrepot', 'Vacatures', 'Contact & route'] },
+];
+const legal = ['Privacy', 'Cookiebeleid', 'Disclaimer', 'Algemene voorwaarden'];
 ---
-<div class="flex flex-col gap-4" data-tile>
+<div class="flex flex-col gap-4" data-tile data-fttile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Footer — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Footer — desktop / mobile<span class="vb-cap-id">#footer</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
-  <div class="vb-footer-band">
-    <div class="vb-footer" data-hdr>
-      <div class="vb-footer__links">
-        <div class="vb-footer__brand">
-          <div class="vb-footer__addr">
-            <span class="vb-footer__logo" set:html={logo}></span>
-            <div class="vb-footer__contact">
-              <p class="vb-footer__lines">Streetname 01<br />1000 City name</p>
-              <p class="vb-footer__lines">+32 12 34 56 78<br /><a class="vb-hdr-email" href="mailto:name@email.com">name@email.com</a></p>
-            </div>
-          </div>
-          <div class="vb-hdr-socials">
-            {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
-          </div>
-        </div>
-        {columns.map((title) => (
-          <div class="vb-footer__col">
-            <p class="vb-footer__col-title">{title}</p>
-            <div class="vb-footer__col-links">
-              {links.map((l) => (<a href="#" class="vb-footer__link">{l}</a>))}
-            </div>
-          </div>
-        ))}
+
+  <footer class="vb-footer">
+    <div class="vb-footer__inner">
+    <div class="vb-footer__top">
+      <div class="vb-footer__brand">
+        <span class="vb-footer__logo" set:html={logo}></span>
       </div>
-      <div class="vb-footer__credits">
-        <div class="vb-footer__credits-left">
-          <p class="vb-footer__copy">© 2025 All rights reserved.</p>
-          <div class="vb-footer__legal">
-            <a href="#">Privacybeleid</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookies Settings</a>
+      <div class="vb-footer__contact">
+        <div class="vb-footer__addr">
+          <p class="vb-footer__addrline">Vaartkom<br />3000 Leuven</p>
+          <div class="vb-footer__lines">
+            <p class="vb-footer__phone">016 29 55 49</p>
+            <a href="#" class="vb-footer__email">info@opek.be</a>
+          </div>
+          <div class="vb-footer__socials">
+            <a href="#" class="vb-footer__social" aria-label="Instagram" set:html={iconInsta}></a>
+            <a href="#" class="vb-footer__social" aria-label="LinkedIn" set:html={iconLinkedin}></a>
           </div>
         </div>
-        <span class="vb-footer__sign" set:html={signature}></span>
+        <a href="#" class="vb-btn vb-btn--small vb-ctam__btn vb-footer__cta">Contact &amp; route</a>
       </div>
     </div>
-  </div>
+
+    <div class="vb-footer__menu">
+      {menuCols.map((c) => (
+        <div class="vb-footer__col">
+          <p class="vb-footer__coltitle">{c.title}</p>
+          <div class="vb-footer__links">
+            {c.links.map((l) => (<a href="#" class="vb-footer__link">{l}</a>))}
+          </div>
+        </div>
+      ))}
+      <div class="vb-footer__col vb-footer__col--copy">
+        <div class="vb-footer__links">
+          <a href="#" class="vb-footer__copy">© Copyright Opek</a>
+          {legal.map((l) => (<a href="#" class="vb-footer__legal">{l}</a>))}
+        </div>
+        <div class="vb-footer__sign"><span class="vb-footer__signicon" set:html={iconVb}></span>design by vector bross</div>
+      </div>
+    </div>
+    </div>
+  </footer>
 </div>
 
 <script is:inline>
   (function () {
-    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+    document.querySelectorAll('[data-fttile]').forEach(function (tile) {
       var t = tile.querySelector('[data-mobile-toggle]');
-      var f = tile.querySelector('[data-hdr]');
-      if (!t || !f || t.dataset.bound) return;
-      t.dataset.bound = '1';
-      t.addEventListener('change', function () { f.classList.toggle('is-mobile', t.checked); });
+      var el = tile.querySelector('.vb-footer');
+      if (t && el) t.addEventListener('change', function () { el.classList.toggle('is-mobile', t.checked); });
     });
   })();
 </script>

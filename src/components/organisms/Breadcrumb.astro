@@ -1,21 +1,22 @@
 ---
 /**
- * ORGANISMS — Breadcrumb. Atoms + tokens only.
- * Chips (bg-body, radius-tiny, Caps Medium brand-primary) separated by "/"
- * (secondary-color). Last item = current (Caps Normal, body-color, no chip).
+ * ORGANISMS — Breadcrumb. OPEK Figma 18263:11516. Tokens only.
+ * Green bar. Links = Pitch Semibold caps (underlined). "/" separator (Pitch).
+ * Current = Pitch Medium caps, no underline. All black.
  */
-const items = ['Home', 'Level 2', 'Level3', 'Level 4'];
-const current = 'Current';
+const items = ['Home', 'Agenda', 'Voorstellingen'];
+const current = 'Titel evenement';
 ---
-<div class="flex flex-col gap-4" data-tile>
+<div class="flex flex-col gap-4" data-tile data-bctile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Breadcrumb</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Breadcrumb — desktop / mobile<span class="vb-cap-id">#breadcrumb</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
   <nav class="vb-breadcrumb" aria-label="Breadcrumb">
     <div class="vb-breadcrumb__inner">
       {items.map((label) => (
         <>
-          <a href="#" class="vb-breadcrumb__chip">{label}</a>
+          <a href="#" class="vb-breadcrumb__link">{label}</a>
           <span class="vb-breadcrumb__sep" aria-hidden="true">/</span>
         </>
       ))}
@@ -23,3 +24,13 @@ const current = 'Current';
     </div>
   </nav>
 </div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-bctile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var el = tile.querySelector('.vb-breadcrumb');
+      if (t && el) t.addEventListener('change', function () { el.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

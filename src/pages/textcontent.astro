@@ -2,10 +2,14 @@
 import PortalShell from '../layouts/PortalShell.astro';
 import TextContentSection from '../components/sections/TextContentSection.astro';
 import CkEditorStyles from '../components/sections/CkEditorStyles.astro';
+import StatsBlock from '../components/sections/StatsBlock.astro';
+import BlocksSection from '../components/sections/BlocksSection.astro';
+import NbListSection from '../components/sections/NbListSection.astro';
+import ListSection from '../components/sections/ListSection.astro';
 ---
-<PortalShell title="Text content — Kickstart Theme" active="textcontent">
+<PortalShell title="Text content — Opek - Design System" active="textcontent">
   <div class="vb-lib__head">
-    <h1 class="vb-lib__title">Text content</h1>
+    <h1 class="vb-lib__title">Organisms &mdash; CK Editor &amp; texts</h1>
   </div>
 
   <div class="flex flex-col gap-12">
@@ -17,6 +21,26 @@ import CkEditorStyles from '../components/sections/CkEditorStyles.astro';
     <section id="ckeditor" class="scroll-mt-28 flex flex-col gap-6">
       <h2 class="text-3xl font-semibold tracking-tight">CKEditor styles</h2>
       <CkEditorStyles />
+    </section>
+
+    <section id="stats-block" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Section · stats</h2>
+      <StatsBlock />
+    </section>
+
+    <section id="blocks-section" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Section · blocks</h2>
+      <BlocksSection />
+    </section>
+
+    <section id="nb-list-section" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Section · numbered list</h2>
+      <NbListSection />
+    </section>
+
+    <section id="list-section" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Section · list</h2>
+      <ListSection />
     </section>
   </div>
 </PortalShell>

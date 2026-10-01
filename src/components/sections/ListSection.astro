@@ -1,0 +1,48 @@
+---
+/**
+ * ORGANISMS · text-list (#list-section) — "Over deze ruimte".
+ * Faithful to Figma 18608:20141. 50/50: title left, right = bold lead +
+ * (bold subhead + bullet list + note) × 2. Reuses .vb-textlist molecule.
+ */
+const groups = [
+  { sub: 'Faciliteiten', items: ['tribune', 'theatertechniek', 'kleedkamers'] },
+  { sub: 'Mogelijke toepassingen', items: ['theater', 'staand concert'] },
+];
+const note = '*Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt …';
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Section · list — desktop / mobile<span class="vb-cap-id">#list-section</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-splitsec" data-sec>
+    <h2 class="vb-splitsec__title">Over deze ruimte</h2>
+    <div class="vb-splitsec__body">
+      <p class="vb-splitsec__lead">Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel clasaeos.</p>
+      {groups.map((g) => (
+        <>
+          <h3 class="vb-splitsec__sub">{g.sub}</h3>
+          <ul class="vb-textlist">
+            {g.items.map((it) => (
+              <li class="vb-textlist__item"><span class="vb-textlist__bullet">&bull;</span><span class="vb-textlist__text">{it}</span></li>
+            ))}
+          </ul>
+          <p class="vb-splitsec__note">{note}</p>
+        </>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

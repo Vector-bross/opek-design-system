@@ -1,0 +1,58 @@
+---
+/**
+ * ORGANISMS · Vacatures (#vacatures) — "Werk mee bij de bewoners". Teal band,
+ * white H2 title, bordered list of stacked job rows (left: title H4 + green tag
+ * + deadline; right: lead + description + small outline button), centered outline
+ * button below (white on dark). Figma 18368:16363. Atoms/molecules/tokens only.
+ */
+const lead = 'Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.';
+const desc = 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor ...';
+const jobs = [1, 2];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Vacatures — desktop / mobile<span class="vb-cap-id">#vacatures</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-vacrow" data-sec>
+    <div class="vb-vacrow__inner">
+      <h2 class="vb-vacrow__title">Werk mee bij de bewoners</h2>
+
+      <div class="vb-vacrow__list">
+        {jobs.map(() => (
+          <article class="vb-vaccard">
+            <div class="vb-vaccard__head">
+              <h3 class="vb-vaccard__title">Open call &mdash; open mic</h3>
+              <div class="vb-vaccard__meta">
+                <span class="vb-tag vb-tag--green">Open calls</span>
+                <span class="vb-vaccard__deadline">Reageren tot: vr 10 jul 2026</span>
+              </div>
+            </div>
+            <div class="vb-vaccard__body">
+              <p class="vb-vaccard__lead">{lead}</p>
+              <p class="vb-vaccard__desc">{desc}</p>
+              <a href="#" class="vb-btn vb-btn--secondary vb-btn--small vb-vaccard__btn">Bekijk de vacature</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="on-dark vb-vacrow__cta-wrap">
+        <a href="#" class="vb-btn vb-btn--secondary vb-vacrow__cta">Bekijk het volledige aanbod</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

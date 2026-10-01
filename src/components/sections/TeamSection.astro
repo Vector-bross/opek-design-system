@@ -1,32 +1,37 @@
 ---
 /**
- * ORGANISMS · Page section — TeamSection. Composes existing Card (team member)
- * molecule + atoms. bg-body band, title display-2, View all button.
+ * ORGANISMS · Team (#team-section) — "Team". Dark teal band, H2 white title,
+ * bordered row of 3 vertical cards (portrait image / name H5 / role). Same
+ * vertical-card family as news, simplified. Figma 18286:16096. Tokens only.
  */
 const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const cards = [1, 2, 3];
+const members = [
+  { name: 'Quinten', role: 'Gebouw & ICT' },
+  { name: 'Lisanne', role: 'Zaalhuur, planning & administratie' },
+  { name: 'Kayin', role: 'Communicatie' },
+];
 ---
 <div class="flex flex-col gap-4" data-tile>
   <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
-    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Team section — desktop / mobile</span>
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Team section — desktop / mobile<span class="vb-cap-id">#team-section</span></span>
     <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
   </div>
-  <div class="vb-sec-band vb-sec-band--body">
-    <div class="vb-sec" data-sec>
-      <p class="vb-sec__title">Team</p>
-      <div class="vb-sec__grid vb-sec__grid--slider">
-        {cards.map(() => (
-          <article class="vb-card">
-            <div class="vb-image" set:html={placeholder}></div>
-            <div class="vb-card__body">
-              <h3 class="vb-card__title">Firstname Lastname</h3>
-              <p class="vb-card__sub">Function, company name</p>
+
+  <div class="vb-teamrow" data-sec>
+    <div class="vb-teamrow__inner">
+      <h2 class="vb-teamrow__title">Team</h2>
+
+      <div class="vb-teamrow__grid">
+        {members.map((m) => (
+          <article class="vb-teamcard">
+            <div class="vb-teamcard__img"><div class="vb-image" set:html={placeholder}></div></div>
+            <div class="vb-teamcard__content">
+              <h3 class="vb-teamcard__name">{m.name}</h3>
+              <p class="vb-teamcard__role">{m.role}</p>
             </div>
-            <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
           </article>
         ))}
       </div>
-      <div class="vb-sec__actions"><a href="#" class="vb-btn vb-btn--secondary">View all</a></div>
     </div>
   </div>
 </div>

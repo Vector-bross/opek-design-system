@@ -2,15 +2,13 @@
 import PortalShell from '../layouts/PortalShell.astro';
 import { categories, byCategory, registry } from '../registry';
 import { catalog, cleanSource } from '../lib/catalog';
-import { templates, templateCategories, templateModules, singleTemplates, moduleTemplates } from '../lib/templates';
-import type { TemplateEntry } from '../lib/templates';
 const total = registry.length;
 const catLabel = (id: string) => categories.find((c) => c.id === id)?.label ?? id;
 const sources: Record<string, string> = {};
 for (const e of registry) sources[e.id] = cleanSource(catalog[e.id]?.src ?? '');
 const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
 ---
-<PortalShell title="Kickstart Theme — Component library" active="home">
+<PortalShell title="Opek - Design System — Component library" active="home">
   <div class="vb-lib__head vb-lib__head--row">
     <h1 class="vb-lib__title">Website sections</h1>
     <div class="vb-lib__search">
@@ -30,38 +28,6 @@ const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
       <span class="vb-lib__count" id="vb-lib-count">{total} components</span>
     </div>
   </div>
-
-  {templates.length > 0 && (() => {
-    const tplCard = (t: TemplateEntry) => (
-      <article class="vb-libcard" data-tpl-card data-name={t.name.toLowerCase()}>
-        <div class="vb-libcard__thumb">
-          <a class="vb-libcard__thumblink" href={`t/${t.id}.html`} aria-label={`Open ${t.name}`}></a>
-          <iframe class="vb-libcard__iframe" src={`templates/${t.id}.html`} scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
-        </div>
-        <div class="vb-libcard__body">
-          <span class="vb-libcard__cat">{t.module ? templateModules.find((m) => m.id === t.module)?.label : 'Pages'}</span>
-          <a class="vb-libcard__name" href={`t/${t.id}.html`}>{t.name}</a>
-        </div>
-        <div class="vb-libcard__actions">
-          <a class="vb-libcard__copy" href={`t/${t.id}.html`}>View template</a>
-        </div>
-      </article>
-    );
-    return (
-    <section class="vb-lib__cat" id="cat-templates">
-      <h2 class="vb-lib__cat-title">{templateCategories[0].label}</h2>
-      <p class="vb-lib__cat-desc">{templateCategories[0].description}</p>
-      <h3 class="vb-lib__subcat">Single pages</h3>
-      <div class="vb-lib__grid">{singleTemplates().map(tplCard)}</div>
-      {templateModules.map((m) => (
-        <>
-          <h3 class="vb-lib__subcat">{m.label} module</h3>
-          <div class="vb-lib__grid">{moduleTemplates(m.id).map(tplCard)}</div>
-        </>
-      ))}
-    </section>
-    );
-  })()}
 
   {categories.map((cat) => {
     const items = byCategory(cat.id);
@@ -83,6 +49,7 @@ const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
               <div class="vb-libcard__body">
                 <span class="vb-libcard__cat">{catLabel(cat.id)}</span>
                 <a class="vb-libcard__name" href={`c/${e.id}.html`}>{e.name}</a>
+                <span class="vb-libcard__id">#{e.id}{e.figmaNode ? ` · ${e.figmaNode}` : ''}</span>
               </div>
               <div class="vb-libcard__actions">
                 <a class="vb-libcard__copy" href={`c/${e.id}.html`}>View component</a>
@@ -108,15 +75,13 @@ const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
       var empty = document.getElementById('vb-lib-empty');
       var cards = Array.prototype.slice.call(document.querySelectorAll('[data-card]'));
       var sections = Array.prototype.slice.call(document.querySelectorAll('[data-cat-section]'));
-      var tplSection = document.getElementById('cat-templates');
       var searchEl = document.getElementById('vb-lib-search');
-      var tplCards = Array.prototype.slice.call(document.querySelectorAll('[data-tpl-card]'));
       var activeCat = 'all';
       var norm = function (s) { return (s || '').toLowerCase(); };
 
-      // Scale template thumbnails (full desktop render) to fit the card width.
+      // Scale component thumbnails (full desktop render) to fit the card width.
       function fitThumbs() {
-        document.querySelectorAll('.vb-libcard__iframe, .vb-libcard__frame').forEach(function (f) {
+        document.querySelectorAll('.vb-libcard__frame').forEach(function (f) {
           var thumb = f.closest('.vb-libcard__thumb');
           if (thumb && thumb.clientWidth) f.style.transform = 'scale(' + (thumb.clientWidth / 1440) + ')';
         });
@@ -139,25 +104,8 @@ const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
           var any = sec.querySelectorAll('[data-card]:not([style*="display: none"])').length;
           sec.style.display = any ? '' : 'none';
         });
-        // Templates: filter by query; whole section only shown on "All".
-        var tplVisible = 0;
-        tplCards.forEach(function (card) {
-          var qOk = !q || norm(card.getAttribute('data-name')).indexOf(q) !== -1;
-          card.style.display = qOk ? '' : 'none';
-          if (qOk) tplVisible++;
-        });
-        if (tplSection) {
-          tplSection.style.display = (activeCat === 'all' && tplVisible) ? '' : 'none';
-          // hide sub-headings whose grid has no visible card
-          tplSection.querySelectorAll('.vb-lib__grid').forEach(function (grid) {
-            var any = grid.querySelectorAll('[data-tpl-card]:not([style*="display: none"])').length;
-            grid.style.display = any ? '' : 'none';
-            var head = grid.previousElementSibling;
-            if (head && head.classList.contains('vb-lib__subcat')) head.style.display = any ? '' : 'none';
-          });
-        }
         count.textContent = visible + (visible === 1 ? ' component' : ' components');
-        empty.style.display = (visible || (activeCat === 'all' && tplVisible)) ? 'none' : 'block';
+        empty.style.display = visible ? 'none' : 'block';
       }
 
       filters.addEventListener('click', function (e) {
