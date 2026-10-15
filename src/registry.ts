@@ -88,7 +88,7 @@ export const registry: RegistryEntry[] = [
   { id: 'vacatures', name: 'Vacatures', description: '“Werk mee bij de bewoners”: bordered list of job rows (title + tag + deadline / lead + description + CTA), global CTA.', category: 'careers', atomicLevel: 'section', tags: ['jobs', 'careers', 'vacatures'], deps: ['Tag', 'Button'], figmaNode: '18368:16363' },
 
   // Footers
-  { id: 'footer', name: 'Footer', description: 'Page footer: brand + contact + socials, three menu columns, credits.', category: 'footers', atomicLevel: 'organism', tags: ['footer'], deps: ['Logo', 'Social', 'Signature'], figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15387-889' },
+  { id: 'footer', name: 'Footer', description: 'Page footer (light green band): OPEK brand + contact + socials + Contact & route CTA, three menu columns, credits.', category: 'footers', atomicLevel: 'organism', tags: ['footer'], deps: ['Logo', 'Social', 'Signature'], figmaNode: '18261:12274' },
 ];
 
 export const byId = (id: string) => registry.find((e) => e.id === id);
