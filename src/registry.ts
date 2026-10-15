@@ -53,7 +53,7 @@ export const registry: RegistryEntry[] = [
   { id: 'filters', name: 'Filters', description: 'Faceted filter panel (teal groups) with radios and checkboxes.', category: 'navigation', atomicLevel: 'organism', tags: ['filters', 'facets', 'radio', 'checkbox'], deps: ['Radio', 'Checkbox'], usage: 'Sidebar of listing pages (agenda, residents) to filter results.', figmaNode: '18591:17771' },
 
   // Headers & Heroes
-  { id: 'header', name: 'Header Content', description: 'Page header (green): title + intro + CTA, with or without image; plus Blog and Job headers.', category: 'headers', atomicLevel: 'organism', tags: ['header', 'title', 'blog', 'contact'], deps: ['Button', 'Tag', 'Image', 'Social', 'Logo'], usage: 'Inner-page header depending on the content type.', figma: 'https://www.figma.com/design/Y2Tg1bc4gkFux4bDiH38bL/vb-kickstarter-design-v02?node-id=15669-11468' },
+  { id: 'header', name: 'Header Content', description: 'Page header (light green band): H1 title + intro + CTA, with or without image. Plus Blog and Job header variants.', category: 'headers', atomicLevel: 'organism', tags: ['header', 'title', 'blog', 'contact'], deps: ['Button', 'Tag', 'Image', 'Social', 'Logo'], usage: 'Inner-page header depending on the content type.', figmaNode: '18274:12991' },
   { id: 'hero', name: 'Hero (brand)', description: 'Home hero: green band, 2px top/bottom borders, brand logo + right-aligned tagline (H3).', category: 'headers', atomicLevel: 'organism', tags: ['hero', 'home', 'brand', 'logo'], deps: ['Logo'], usage: 'Top of the homepage.', figmaNode: '18672:20018' },
 
   // Events
