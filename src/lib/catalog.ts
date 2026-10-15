@@ -30,7 +30,7 @@ import StatsSection from '../components/sections/StatsSection.astro';
 import BrandsSection from '../components/sections/BrandsSection.astro';
 import FormSection from '../components/sections/FormSection.astro';
 import TextContentSection from '../components/sections/TextContentSection.astro';
-import IntroBanner from '../components/tiles/IntroBanner.astro';
+import IntroText from '../components/sections/IntroText.astro';
 import Quote from '../components/tiles/Quote.astro';
 import Gallery from '../components/tiles/Gallery.astro';
 import CtaSmall from '../components/sections/CtaSmall.astro';
@@ -63,7 +63,7 @@ import StatsSectionSrc from '../components/sections/StatsSection.astro?raw';
 import BrandsSectionSrc from '../components/sections/BrandsSection.astro?raw';
 import FormSectionSrc from '../components/sections/FormSection.astro?raw';
 import TextContentSectionSrc from '../components/sections/TextContentSection.astro?raw';
-import IntroBannerSrc from '../components/tiles/IntroBanner.astro?raw';
+import IntroTextSrc from '../components/sections/IntroText.astro?raw';
 import QuoteSrc from '../components/tiles/Quote.astro?raw';
 import GallerySrc from '../components/tiles/Gallery.astro?raw';
 import CtaSmallSrc from '../components/sections/CtaSmall.astro?raw';
@@ -109,7 +109,7 @@ export const catalog: Record<string, CatalogItem> = {
   'vacatures': { Component: VacaturesSection, src: VacaturesSectionSrc },
   'logos': { Component: LogosSection, src: LogosSectionSrc },
   'text-content': { Component: TextContentSection, src: TextContentSectionSrc },
-  'intro-banner': { Component: IntroBanner, src: IntroBannerSrc },
+  'intro-text': { Component: IntroText, src: IntroTextSrc },
   'quote': { Component: Quote, src: QuoteSrc },
   'gallery': { Component: GallerySection, src: GallerySectionSrc },
   'cta-with-media': { Component: CtaWithMedia, src: CtaWithMediaSrc },

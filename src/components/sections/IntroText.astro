@@ -1,0 +1,37 @@
+---
+/**
+ * ORGANISMS · Intro text (#intro-text) — editorial intro: short lead rule +
+ * large two-tone title (highlighted start in black, rest dimmed grey) + lead
+ * paragraph + small outline button. Figma 18607:20014. Atoms/tokens only.
+ */
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Intro text — desktop / mobile<span class="vb-cap-id">#intro-text</span></span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-introtext" data-sec>
+    <div class="vb-introtext__inner">
+      <h2 class="vb-introtext__title">
+        <span class="vb-introtext__rule" aria-hidden="true"></span><span class="vb-introtext__hl">Cultureel verzamelgebouw aan de Vaartkom</span> &ndash; waar bewoners, voorstellingen, workshops en caf&eacute; samenkomen.
+      </h2>
+      <div class="vb-introtext__desc">
+        <p class="vb-introtext__text">Ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occa.</p>
+        <a href="#" class="vb-btn vb-btn--secondary vb-btn--small vb-introtext__btn">Meer over OPEK</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>
