@@ -1219,6 +1219,8 @@ textarea.vb-input { height: auto; min-height: 200px; resize: vertical; padding: 
 .vb-footer__social { width: 36px; height: 36px; flex: none; display: inline-flex; align-items: center; justify-content: center; border: var(--vb-border-width) solid var(--vb-color-neutral-darkest); margin-left: -1px; color: var(--vb-color-neutral-darkest); }
 .vb-footer__social:first-child { margin-left: 0; }
 .vb-footer__social svg { width: 19px; height: 19px; display: block; }
+.vb-footer__social svg [fill]:not([fill="none"]) { fill: currentColor; }
+.vb-footer__social svg [stroke]:not([stroke="none"]) { stroke: currentColor; }
 .vb-footer__cta { align-self: flex-start; }
 /* menu */
 .vb-footer__menu { display: flex; gap: var(--vb-spacer-7); align-items: flex-start; }
